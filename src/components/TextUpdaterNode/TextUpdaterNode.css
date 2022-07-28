@@ -1,0 +1,19 @@
+.text-updater-node {
+  height: 50px;
+  border: 1px solid #ffffff;
+  padding: 5px;
+  border-radius: 12px;
+  background: #4B0082;
+}
+
+.text-updater-node:hover {
+  background: #8A2BE2;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.text-updater-node label {
+  text-align: center;
+  display: block;
+  color: #ffffff;
+  font-size: 12px;
+}

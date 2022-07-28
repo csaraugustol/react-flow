@@ -1,0 +1,77 @@
+.dndflow {
+  flex-direction: column;
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+}
+
+.dndflow .reactflow-wrapper {
+  flex-grow: 1;
+  height: 100%;
+}
+
+.dndflow .selectall {
+  margin-top: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .dndflow {
+    flex-direction: row;
+  }
+
+  .dndflow aside {
+    width: 20%;
+    max-width: 250px;
+  }
+}
+
+.save__controls .btn-save, .save__controls .btn-restore {
+  text-align: center;
+  width: 100px;
+  height: 30px;
+  font-weight: bold;
+  margin-top: 5px;
+  border-radius: 12px;
+  margin-right: 5px;
+}
+
+.save__controls .btn-save {
+  background-color: rgb(12, 161, 31);
+}
+
+.save__controls .btn-restore {
+  background-color: rgb(254, 0, 0);
+}
+
+.base-node {
+  font-weight: bold;
+  border-radius: 12px;
+  border: none;
+  width: 180px;
+}
+
+.base-node.input-node-inicial {
+  background-color: #F0E68C;
+  border: 1px solid #FFD700;
+}
+
+
+.base-node.input-node-inicial:hover {
+  background-color: #FFD700;
+  border: 1px solid #DAA520;
+}
+
+.base-node.input-node {
+  background-color: #0041d0;
+  color: #ffffff;
+}
+
+.base-node.default-node {
+  background-color: #1a192b;
+  color: #ffffff;
+}
+
+.base-node.output-node {
+  background-color: #ff0072;
+  color: #1a192b;
+}
