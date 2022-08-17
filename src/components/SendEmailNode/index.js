@@ -22,7 +22,7 @@ function SendEmailNode({ data }) {
             
             <div>
                 <ul>
-                    <li style={{ listStyleType: 'none' }}>DESTINATARIOS:</li>
+                    <li style={{ listStyleType: 'none' }}>Enviar e-mail para:</li>
                     
 
 
