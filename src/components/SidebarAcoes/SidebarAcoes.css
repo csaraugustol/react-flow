@@ -102,3 +102,17 @@ aside .description {
 .dndnode.text-updater:hover:after {
     width: 110%;
 }
+
+.sidebar-acoes {
+    display: none;
+    height: 100%;
+  }
+  
+  .btn-close {
+    background-color: #DAA520;
+  }
+
+  .cabecalho-sidebar-acoes {
+    display: flex;
+    justify-content: space-between;
+  }
