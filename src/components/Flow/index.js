@@ -53,17 +53,20 @@ const Flow = () => {
     const { setViewport } = useReactFlow();
     const [show, setShow] = useState(false);
 
-    const handleCloseEmail = () => {
-
-        setShow(false)
-    };
+    const handleCloseEmail = () => setShow(false);
     const handleShowEmail = () => setShow(true);
     const handleAddEmail = () => {
 
         let lista = document.getElementById("listaDestinatarios");
         let newValue = document.getElementById("newEmail");
         var li = document.createElement("li");
+
         
+        li.onclick = function () {
+            lista.removeChild(li);
+        };
+        debugger
+
         li.value = newValue.value;
         li.innerHTML = `${newValue.value}`;
         lista.appendChild(li);
@@ -81,6 +84,16 @@ const Flow = () => {
         newValue.value = "";
     };
 
+    const handleAddAndCloseEmail = () => {
+
+        //get destinatario principal
+        let destinatarioPrincipal = "destinatario@principal.com";
+
+        localStorage.setItem("listaDestinatarios", destinatarioPrincipal);
+
+        handleCloseEmail();
+    };
+    
     const flowKey = 'flow-token-123';
 
     const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
@@ -188,12 +201,13 @@ const Flow = () => {
                     show={show}
                     backdrop="static"
                     keyboard={false}
+                    onHide={() => setShow(false)}
                 >
-                    <Modal.Header >
+                    <Modal.Header closeButton>
                         <Row>
                             <Col xs="auto"><Modal.Title>Enviar E-mail</Modal.Title></Col>
 
-                            <Col xs="auto"><Button variant="outline-primary" id="button-addon2">
+                            <Col xs="auto"><Button variant="outline-primary" id="button-addon2" onClick={handleAddAndCloseEmail}>
                                 Enviar para o destinatario principal
                             </Button></Col>
                         </Row>

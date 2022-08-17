@@ -8,7 +8,12 @@ function SendEmailNode({ data }) {
     const handleStyle = { left: 10 };
 
     const labelData = [localStorage.getItem("listaDestinatarios")];
-    const labelDataSplitted = labelData[0].split(",")
+    let labelDataSplitted = [];
+    if (labelData[0] != null) {
+        
+        labelDataSplitted = labelData[0].split(",")
+    }
+        
 
     return (
         <div className="send-email-node">
@@ -17,7 +22,10 @@ function SendEmailNode({ data }) {
             
             <div>
                 <ul>
-                    <li style={{ listStyleType: 'none' } }>DESTINATARIOS:</li>
+                    <li style={{ listStyleType: 'none' }}>DESTINATARIOS:</li>
+                    
+
+
                     {labelDataSplitted.map(item => <li key={item}>{item}</li>) }
                 </ul>
             </div>
