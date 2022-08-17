@@ -13,6 +13,9 @@ import Sidebar from '../Sidebar';
 import TextUpdaterNode from '../TextUpdaterNode';
 import SelectUpdaterNode from '../SelectUpdaterNode';
 import React, { useState, useRef, useCallback } from 'react';
+import SendEmailNode from '../SendEmailNode/index';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 const initialNodes = [
     {
@@ -34,7 +37,7 @@ const initialNodes = [
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 
-const nodeTypes = { textUpdater: TextUpdaterNode, selectUpdater: SelectUpdaterNode };
+const nodeTypes = { textUpdater: TextUpdaterNode, selectUpdater: SelectUpdaterNode, sendEmail: SendEmailNode };
 
 const Flow = () => {
     const reactFlowWrapper = useRef(null);
@@ -42,7 +45,10 @@ const Flow = () => {
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const [reactFlowInstance, setReactFlowInstance] = useState(null);
     const { setViewport } = useReactFlow();
+    const [show, setShow] = useState(false);
 
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const flowKey = 'flow-token-123';
 
     const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
@@ -67,6 +73,13 @@ const Flow = () => {
             if (typeof label === 'undefined' || !label) {
                 return;
             }
+
+            if (type === 'sendEmail') {
+                console.log(type);
+                handleShow();
+            }
+                
+            
 
             const position = reactFlowInstance.project({
                 x: event.clientX - reactFlowBounds.left,
@@ -143,6 +156,26 @@ const Flow = () => {
                     <button className='btn-restore' onClick={onRestore}>Restore</button>
                 </div>
                 <Sidebar />
+                <Modal
+                    show={show}
+                    onHide={handleClose}
+                    backdrop="static"
+                    keyboard={false}
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>Modal title</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        I will not close if you click outside me. Don't even try to press
+                        escape key.
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="primary">Understood</Button>
+                    </Modal.Footer>
+                </Modal>
             </ReactFlowProvider>
         </div>
     );
@@ -152,4 +185,5 @@ export default () => (
     <ReactFlowProvider>
         <Flow />
     </ReactFlowProvider>
+
 );
