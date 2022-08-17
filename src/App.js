@@ -6,7 +6,8 @@ function App() {
   return (
     <div className='tamanho-tela'>
       <Flow />
-    </div>
+      </div>
+
   );
 }
 
