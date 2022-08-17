@@ -28,9 +28,6 @@ export default () => {
       <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectEventos', 'Eventos Node')} draggable>
         Eventos
       </div>
-      <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectEventos', 'Eventos Node')} draggable>
-        Valor cotado
-      </div>
     </aside>
   );
 };

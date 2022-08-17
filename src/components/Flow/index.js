@@ -26,18 +26,20 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import SendSMSNode from '../SendSMSNode/index';
+import SendWPPNode from '../SendWPPNode/index';
 
-const initialNodes = [
-    {
-        id: '1',
-        type: 'input',
-        data: { label: 'Input Node' },
-        position: { x: 250, y: 5 },
-        sourcePosition: 'right',
-        targetPosition: 'left',
-        className: 'base-node input-node-inicial'
-    }
-];
+//const initialNodes = [
+    //{
+    //    id: '1',
+    //    type: 'input',
+    //    data: { label: 'Input Node' },
+    //    position: { x: 250, y: 5 },
+    //    sourcePosition: 'right',
+    //    targetPosition: 'left',
+    //    className: 'base-node input-node-inicial'
+    //}
+//];
 
 // const initialEdges = [
 //   { id: '1', source: '1', sourceHandle: 'a', target: '3' },
@@ -51,6 +53,8 @@ const nodeTypes = {
     textUpdater: TextUpdaterNode,
     selectAtrasoColeta: SelectAtrasoColeta,
     sendEmail: SendEmailNode,
+    sendSms: SendSMSNode,
+    sendWhatsapp: SendWPPNode,
     selectAtrasoEntrega: SelectAtrasoEntrega,
     selectDivergenciaValor: SelectDivergenciaValor,
     selectDivergenciaValorFrete: SelectDivergenciaValorFrete,
@@ -59,17 +63,26 @@ const nodeTypes = {
 
 const Flow = () => {
     const reactFlowWrapper = useRef(null);
-    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+    const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const [reactFlowInstance, setReactFlowInstance] = useState(null);
     const { setViewport } = useReactFlow();
-    const [show, setShow] = useState(false);
+    const [showEmail, setShowEmail] = useState(false);
+    const [showSMS, setShowSMS] = useState(false);
+    const [showWPP, setShowWPP] = useState(false);
 
-    const handleCloseEmail = () => setShow(false);
-    const handleShowEmail = () => setShow(true);
+    const handleCloseWPP = () => setShowWPP(false);
+    const handleShowWPP = () => setShowWPP(true);
+
+    const handleCloseSMS = () => setShowSMS(false);
+    const handleShowSMS = () => setShowSMS(true);
+
+    const handleCloseEmail = () => setShowEmail(false);
+    const handleShowEmail = () => setShowEmail(true);
+
     const handleAddEmail = () => {
 
-        let lista = document.getElementById("listaDestinatarios");
+        let lista = document.getElementById("listaDestinatariosEmail");
         let newValue = document.getElementById("newEmail");
         var li = document.createElement("li");
 
@@ -86,7 +99,7 @@ const Flow = () => {
             arrayLS.push(lis[i].innerHTML);
         }
 
-        localStorage.setItem("listaDestinatarios", arrayLS);
+        localStorage.setItem("listaDestinatariosEmail", arrayLS);
 
         li.onclick = function () {
             lista.removeChild(li);
@@ -98,22 +111,115 @@ const Flow = () => {
                 arrayLS.push(lis[i].innerHTML);
             }
 
-            localStorage.setItem("listaDestinatarios", arrayLS);
+            localStorage.setItem("listaDestinatariosEmail", arrayLS);
         };
 
         newValue.value = "";
     };
+    const handleAddSMS = () => {
+
+        let lista = document.getElementById("listaDestinatariosSMS");
+        let newValue = document.getElementById("newSMS");
+        var li = document.createElement("li");
+
+        li.value = newValue.value;
+        li.innerHTML = `${newValue.value}`;
+        li.title = "REMOVER";
+        lista.appendChild(li);
+
+        var lis = lista.getElementsByTagName('li');
+
+        const arrayLS = [];
+
+        for (let i = 0; i <= lis.length - 1; i++) {
+            arrayLS.push(lis[i].innerHTML);
+        }
+
+        localStorage.setItem("listaDestinatariosSMS", arrayLS);
+
+        li.onclick = function () {
+            lista.removeChild(li);
+            var lis = lista.getElementsByTagName('li');
+
+            const arrayLS = [];
+
+            for (let i = 0; i <= lis.length - 1; i++) {
+                arrayLS.push(lis[i].innerHTML);
+            }
+
+            localStorage.setItem("listaDestinatariosSMS", arrayLS);
+        };
+
+        newValue.value = "";
+    };
+    const handleAddWPP = () => {
+
+        let lista = document.getElementById("listaDestinatariosWPP");
+        let newValue = document.getElementById("newWPP");
+        var li = document.createElement("li");
+
+        li.value = newValue.value;
+        li.innerHTML = `${newValue.value}`;
+        li.title = "REMOVER";
+        lista.appendChild(li);
+
+        var lis = lista.getElementsByTagName('li');
+
+        const arrayLS = [];
+
+        for (let i = 0; i <= lis.length - 1; i++) {
+            arrayLS.push(lis[i].innerHTML);
+        }
+
+        localStorage.setItem("listaDestinatariosWPP", arrayLS);
+
+        li.onclick = function () {
+            lista.removeChild(li);
+            var lis = lista.getElementsByTagName('li');
+
+            const arrayLS = [];
+
+            for (let i = 0; i <= lis.length - 1; i++) {
+                arrayLS.push(lis[i].innerHTML);
+            }
+
+            localStorage.setItem("listaDestinatariosWPP", arrayLS);
+        };
+
+        newValue.value = "";
+    };
+
 
     const handleAddAndCloseEmail = () => {
 
         //get destinatario principal
         let destinatarioPrincipal = "destinatario@principal.com";
 
-        localStorage.setItem("listaDestinatarios", destinatarioPrincipal);
+        localStorage.setItem("listaDestinatariosEmail", destinatarioPrincipal);
 
         handleCloseEmail();
     };
-    
+
+    const handleAddAndCloseSMS = () => {
+
+        //get destinatario principal
+        let destinatarioPrincipal = "(32) 91234-5678";
+
+        localStorage.setItem("listaDestinatariosSMS", destinatarioPrincipal);
+
+        handleCloseSMS();
+    };
+
+    const handleAddAndCloseWPP = () => {
+
+        //get destinatario principal
+        let destinatarioPrincipal = "(32) 91234-5678";
+
+        localStorage.setItem("listaDestinatariosWPP", destinatarioPrincipal);
+
+        handleCloseSMS();
+    };
+
     const flowKey = 'flow-token-123';
 
     const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
@@ -140,8 +246,15 @@ const Flow = () => {
             }
 
             if (type === 'sendEmail') {
-                console.log(label);
                 handleShowEmail();
+            }
+
+            if (type === 'sendSms') {
+                handleShowSMS();
+            }
+
+            if (type === 'sendWhatsapp') {
+                handleShowWPP();
             }
 
             const position = reactFlowInstance.project({
@@ -216,12 +329,13 @@ const Flow = () => {
                     <button className='btn-restore' onClick={onRestore}>Restore</button>
                 </div>
                 <SidebarAcoes />
+                {/*Modal EMAIL*/}
                 <Modal
                     size="lg"
-                    show={show}
+                    show={showEmail}
                     backdrop="static"
                     keyboard={false}
-                    onHide={() => setShow(false)}
+                    onHide={() => setShowEmail(false)}
                 >
                     <Modal.Header closeButton>
                         <Row>
@@ -249,13 +363,103 @@ const Flow = () => {
                         </Form>
                         <hr />
                         <p>Destinatarios Selecionados:</p>
-                        <ul id="listaDestinatarios">
+                        <ul id="listaDestinatariosEmail">
 
                         </ul>
 
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" onClick={handleCloseEmail}>
+                            SELECIONAR
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                {/*Modal SMS*/}
+                <Modal
+                    size="lg"
+                    show={showSMS}
+                    backdrop="static"
+                    keyboard={false}
+                    onHide={() => setShowSMS(false)}
+                >
+                    <Modal.Header closeButton>
+                        <Row>
+                            <Col xs="auto"><Modal.Title>Enviar SMS</Modal.Title></Col>
+
+                            <Col xs="auto"><Button variant="outline-primary" id="button-addon2" onClick={handleAddAndCloseSMS}>
+                                Enviar para o destinatario principal
+                            </Button></Col>
+                        </Row>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group className="mb-3" controlId="formBasicSMS">
+                                <InputGroup className="mb-3">
+                                    <InputGroup.Text>Adicionar destinatario: </InputGroup.Text>
+                                    <FloatingLabel label="(DDD) + Numero">
+                                        <Form.Control type="text" id="newSMS" placeholder="(DDD) 9 1234-5678" style={{ borderRadius: 0, width: 450 }} />
+                                    </FloatingLabel>
+                                    <Button variant="outline-primary" id="button-addon2" onClick={handleAddSMS}>
+                                        Adicionar
+                                    </Button>
+                                </InputGroup>
+                            </Form.Group>
+                        </Form>
+                        <hr />
+                        <p>Destinatarios Selecionados:</p>
+                        <ul id="listaDestinatariosSMS">
+
+                        </ul>
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleCloseSMS}>
+                            SELECIONAR
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                {/*Modal WHATSAPP*/}
+                <Modal
+                    size="lg"
+                    show={showWPP}
+                    backdrop="static"
+                    keyboard={false}
+                    onHide={() => setShowWPP(false)}
+                >
+                    <Modal.Header closeButton>
+                        <Row>
+                            <Col xs="auto"><Modal.Title>Enviar mensagem WhatsApp</Modal.Title></Col>
+
+                            <Col xs="auto"><Button variant="outline-primary" id="button-addon2" onClick={handleAddAndCloseWPP}>
+                                Enviar para o destinatario principal
+                            </Button></Col>
+                        </Row>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group className="mb-3" controlId="formBasicWPP">
+                                <InputGroup className="mb-3">
+                                    <InputGroup.Text>Adicionar destinatario: </InputGroup.Text>
+                                    <FloatingLabel label="(DDD) + Numero">
+                                        <Form.Control type="text" id="newWPP" placeholder="(DDD) 9 1234-5678" style={{ borderRadius: 0, width: 450 }} />
+                                    </FloatingLabel>
+                                    <Button variant="outline-primary" id="button-addon2" onClick={handleAddWPP}>
+                                        Adicionar
+                                    </Button>
+                                </InputGroup>
+                            </Form.Group>
+                        </Form>
+                        <hr />
+                        <p>Destinatarios Selecionados:</p>
+                        <ul id="listaDestinatariosWPP">
+
+                        </ul>
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleCloseWPP}>
                             SELECIONAR
                         </Button>
                     </Modal.Footer>

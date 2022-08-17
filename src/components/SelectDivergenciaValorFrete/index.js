@@ -30,8 +30,8 @@ function SelectAtrasoColeta({ data }) {
                     <option value="Menor ou igual a"> Menor ou igual a </option>
                 </select>
 
-                <div className='dias'>
-                    <input placeholder='Número de dias' id="time" type="number" onChange={onChangeText} /><span>&nbsp;&nbsp;Dias</span>
+                <div className='Valor'><span>R$&nbsp;&nbsp;</span>
+                    <input placeholder='Valor Cotado' id="time" type="number" onChange={onChangeText} />
                 </div>
             </div>
             {/* <Handle type="source" position={Position.Bottom} id="a" style={handleStyle} /> */}
