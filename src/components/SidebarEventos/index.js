@@ -11,10 +11,25 @@ export default () => {
 
   return (
     <aside>
-      <h3>Eventos</h3>
-      <hr/>
-      <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectUpdater', 'Atraso na coleta Node')} draggable>
+      <h3 className='titulo'>Eventos</h3>
+      <hr />
+      <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectAtrasoColeta', 'Atraso na coleta Node')} draggable>
         Atraso na coleta
+      </div>
+      <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectAtrasoEntrega', 'Atraso na entrega Node')} draggable>
+        Atraso na entrega
+      </div>
+      <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectDivergenciaValor', 'Divergencia de valor Node')} draggable>
+        Divergência de valor
+      </div>
+      <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectDivergenciaValorFrete', 'Divergencia no valor do frete Node')} draggable>
+        Divergência no valor do frete
+      </div>
+      <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectEventos', 'Eventos Node')} draggable>
+        Eventos
+      </div>
+      <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectEventos', 'Eventos Node')} draggable>
+        Valor cotado
       </div>
     </aside>
   );

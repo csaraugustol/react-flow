@@ -1,8 +1,11 @@
+.titulo {
+    font-weight: bold;
+}
+
 .dndnode {
-    height: 20px;
+    height: 80px;
     padding: 4px;
     border: 1px solid #000000;
-    border-radius: 12px;
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
@@ -17,6 +20,7 @@
     background-color: #1a192b;
 }
 
+/* 
 .dndnode.input {
     border-color: #0041d0;
     color: #0041d0;
@@ -37,7 +41,7 @@
 .dndnode.output:hover {
     color: #ffffff;
     background-color: #ff0072;
-}
+} */
 
 /*.dndnode.text-updater {
     border-color: #4B0082;

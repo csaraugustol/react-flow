@@ -1,9 +1,9 @@
-import './SelectUpdaterNode.css'
+import './SelectAtrasoColeta.css'
 import React, { useState, useRef, useCallback } from 'react';
 import { Handle, Position } from 'react-flow-renderer';
 
 
-function SelectUpdaterNode({ data }) {
+function SelectAtrasoColeta({ data }) {
 
     const handleStyle = { left: 10 };
 
@@ -19,17 +19,19 @@ function SelectUpdaterNode({ data }) {
     return (
         <div className="select-updater-node">
             {/*<Handle type="target" position={Position.Top} />*/}
-            <div>
+            <div className='conteudo-node'>
                 <label htmlFor="select">Atraso na coleta</label>
+
                 <select id="action" name="select" onChange={onChangeSelect} >
+                    <option value="Igual a"> Igual a </option>
                     <option value="Maior que"> Maior que </option>
-                    <option value="Igual"> Igual a </option>
-                    <option value="Menor"> Menor que </option>
-                    <option value="Menor ou igual"> Menor ou igual a </option>
-                    <option value="Maior ou igual"> Maior ou igual a </option>
+                    <option value="Maior ou igual a"> Maior ou igual a </option>
+                    <option value="Menor que"> Menor que </option>
+                    <option value="Menor ou igual a"> Menor ou igual a </option>
                 </select>
-                <div className="dias">
-                    <input id="time" type="number" onChange={onChangeText} /> Dias
+
+                <div className='dias'>
+                    <input placeholder='Número de dias' id="time" type="number" onChange={onChangeText} /><span>&nbsp;&nbsp;Dias</span>
                 </div>
             </div>
             {/* <Handle type="source" position={Position.Bottom} id="a" style={handleStyle} /> */}
@@ -42,4 +44,4 @@ function SelectUpdaterNode({ data }) {
     );
 }
 
-export default SelectUpdaterNode;
+export default SelectAtrasoColeta;

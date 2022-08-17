@@ -1,0 +1,35 @@
+.select-updater-node {
+    width: 100%;
+    border: 1px solid #FFA500;
+    padding: 7px;
+    border-radius: 12px;
+    background: #ff8c0095;
+    font-size: 12px;
+    justify-content: center;
+}
+
+.select-updater-node:hover {
+    background: #FFA500;
+    border: 1px solid #FF8C00;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
+    transition: 0.3s;
+}
+
+.select-updater-node label {
+    text-align: center;
+    display: block;
+    color: black;
+}
+
+.select-updater-node select {
+    width: 100%;
+    height: 25px;
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.select-updater-node input {
+    width: 81%;
+    text-align: center;
+}

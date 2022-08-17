@@ -12,7 +12,11 @@ import './Flow.css';
 import SidebarAcoes from '../SidebarAcoes';
 import SidebarEventos from '../SidebarEventos';
 import TextUpdaterNode from '../TextUpdaterNode';
-import SelectUpdaterNode from '../SelectUpdaterNode';
+import SelectAtrasoColeta from '../SelectAtrasoColeta';
+import SelectAtrasoEntrega from '../SelectAtrasoEntrega';
+import SelectDivergenciaValor from '../SelectDivergenciaValor';
+import SelectDivergenciaValorFrete from '../SelectDivergenciaValorFrete';
+import SelectEventos from '../SelectEventos';
 import React, { useState, useRef, useCallback } from 'react';
 import SendEmailNode from '../SendEmailNode/index';
 import Modal from 'react-bootstrap/Modal';
@@ -38,7 +42,15 @@ const initialNodes = [
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 
-const nodeTypes = { textUpdater: TextUpdaterNode, selectUpdater: SelectUpdaterNode, sendEmail: SendEmailNode };
+const nodeTypes = {
+    textUpdater: TextUpdaterNode,
+    selectAtrasoColeta: SelectAtrasoColeta,
+    sendEmail: SendEmailNode,
+    selectAtrasoEntrega: SelectAtrasoEntrega,
+    selectDivergenciaValor: SelectDivergenciaValor,
+    selectDivergenciaValorFrete: SelectDivergenciaValorFrete,
+    selectEventos: SelectEventos,
+};
 
 const Flow = () => {
     const reactFlowWrapper = useRef(null);
