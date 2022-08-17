@@ -1,6 +1,7 @@
-.titulo-eventos {
-    text-align: center;
+.titulo-acoes {
+    margin-top: 0;
     text-decoration: underline;
+    text-align: start;
 }
 
 .dndnode {

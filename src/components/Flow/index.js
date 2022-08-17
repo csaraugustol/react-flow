@@ -12,6 +12,7 @@ import './Flow.css';
 import Sidebar from '../Sidebar';
 import TextUpdaterNode from '../TextUpdaterNode';
 import SelectUpdaterNode from '../SelectUpdaterNode';
+import AcoesAtrasoEntrega from '../AcoesAtrasoEntrega';
 import React, { useState, useRef, useCallback } from 'react';
 
 const initialNodes = [
@@ -113,7 +114,8 @@ const Flow = () => {
 
   return (
     <div className='dndflow'>
-      <ReactFlowProvider>
+      <ReactFlowProvider> 
+      <Sidebar />
         <div className="reactflow-wrapper" ref={reactFlowWrapper}>
           <ReactFlow
             nodes={nodes}
@@ -137,7 +139,7 @@ const Flow = () => {
           <button className='btn-save' onClick={onSave}>Save</button>
           <button className='btn-restore' onClick={onRestore}>Restore</button>
         </div>
-        <Sidebar />
+      <AcoesAtrasoEntrega/>
       </ReactFlowProvider>
     </div>
   );

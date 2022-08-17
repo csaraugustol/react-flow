@@ -1,8 +1,8 @@
 .select-updater-node {
-    height: 50px;
+    height: 80px;
     border: 1px solid #FFA500;
     padding: 7px;
-    border-radius: 12px;
+    /* border-radius: 12px; */
     background: #FF8C00;
 }
 

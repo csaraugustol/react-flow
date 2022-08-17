@@ -1,4 +1,4 @@
-import './Sidebar.css';
+import './AcoesAtrasoEntrega.css';
 import React, { Children } from 'react';
 
 export default () => {
@@ -11,9 +11,10 @@ export default () => {
 
   return (
     <aside>
-      <h3 className='titulo-eventos'>Eventos</h3>
+      <h3 className='titulo-acoes'>Ações</h3>
+      <h2 className='subtitulos'>Condição</h2>
       <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectUpdater', 'Select Updater Node')} draggable>
-        Atraso na entrega
+        Ações
       </div>
       <div className="dndnode input" onDragStart={(event) => onDragStart(event, 'input', 'Input Node')} draggable>
         Input Node

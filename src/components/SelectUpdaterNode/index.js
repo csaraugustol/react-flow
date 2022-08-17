@@ -13,12 +13,17 @@ function SelectUpdaterNode({ data }) {
     <div className="select-updater-node">
       <Handle type="target" position={Position.Top} />
       <div>
-        <label htmlFor="select">Select</label>
+        <label htmlFor="select">Atraso na entrega</label>
         <select id="select" name="select" onChange={onChange} >
-          <option value="1"> 1 </option>
-          <option value="2"> 2 </option>
-          <option value="3"> 3 </option>
+          <option value="1">Igual</option>
+          <option value="2">Maior que</option>
+          <option value="3">Maior ou igual</option>
+          <option value="4">Menor ou igual</option>
+          <option value="5">Menor</option>
         </select>
+        <div>
+          <input placeholder='Número de dias' type='number'/>
+        </div>
       </div>
       {/* <Handle type="source" position={Position.Bottom} id="a" style={handleStyle} /> */}
       <Handle type="source" position={Position.Bottom} id="b" />
