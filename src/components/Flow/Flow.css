@@ -75,3 +75,11 @@
   background-color: #ff0072;
   color: #1a192b;
 }
+
+ul {
+    list-style-type: disc;
+}
+
+ul li:hover{
+    cursor: pointer;
+}
