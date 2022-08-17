@@ -9,7 +9,8 @@ import ReactFlow, {
     useReactFlow
 } from 'react-flow-renderer';
 import './Flow.css';
-import Sidebar from '../Sidebar';
+import SidebarAcoes from '../SidebarAcoes';
+import SidebarEventos from '../SidebarEventos';
 import TextUpdaterNode from '../TextUpdaterNode';
 import SelectUpdaterNode from '../SelectUpdaterNode';
 import React, { useState, useRef, useCallback } from 'react';
@@ -131,6 +132,7 @@ const Flow = () => {
     return (
         <div className='dndflow'>
             <ReactFlowProvider>
+              <SidebarEventos />
                 <div className="reactflow-wrapper" ref={reactFlowWrapper}>
                     <ReactFlow
                         nodes={nodes}
@@ -155,7 +157,7 @@ const Flow = () => {
                     <button className='btn-save' onClick={onSave}>Save</button>
                     <button className='btn-restore' onClick={onRestore}>Restore</button>
                 </div>
-                <Sidebar />
+                <SidebarAcoes />
                 <Modal
                     show={show}
                     onHide={handleClose}
