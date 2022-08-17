@@ -17,6 +17,11 @@ import React, { useState, useRef, useCallback } from 'react';
 import SendEmailNode from '../SendEmailNode/index';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import InputGroup from 'react-bootstrap/InputGroup';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 const initialNodes = [
     {
@@ -48,8 +53,34 @@ const Flow = () => {
     const { setViewport } = useReactFlow();
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleCloseEmail = () => {
+
+        setShow(false)
+    };
+    const handleShowEmail = () => setShow(true);
+    const handleAddEmail = () => {
+
+        let lista = document.getElementById("listaDestinatarios");
+        let newValue = document.getElementById("newEmail");
+        var li = document.createElement("li");
+        
+        li.value = newValue.value;
+        li.innerHTML = `${newValue.value}`;
+        lista.appendChild(li);
+
+        var lis = lista.getElementsByTagName('li');
+
+        const arrayLS = [];
+        
+        for (let i = 0; i <= lis.length - 1; i++) {
+            arrayLS.push(lis[i].innerHTML);
+        }
+
+        localStorage.setItem("listaDestinatarios", arrayLS);
+
+        newValue.value = "";
+    };
+
     const flowKey = 'flow-token-123';
 
     const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
@@ -76,20 +107,15 @@ const Flow = () => {
             }
 
             if (type === 'sendEmail') {
-                console.log(type);
-                handleShow();
+                console.log(label);
+                handleShowEmail();
             }
-                
-            
 
             const position = reactFlowInstance.project({
                 x: event.clientX - reactFlowBounds.left,
                 y: event.clientY - reactFlowBounds.top,
             });
 
-            //const labelSplit = label.split(' ');
-            //const nameOfClass = labelSplit[0]; 
-            //console.log(nameOfClass.toLowerCase());
             const nameOfClass = label.replace(" ", "-")
             const newNode = {
                 id: getId(),
@@ -99,7 +125,6 @@ const Flow = () => {
                 targetPosition: 'left',
                 data: { label: `${label}` },
                 className: 'base-node ' + nameOfClass.toLowerCase(),
-                //className: 'dndnode ' + nameOfClass.toLowerCase(),
             };
 
             setNodes((nds) => nds.concat(newNode));
@@ -132,7 +157,7 @@ const Flow = () => {
     return (
         <div className='dndflow'>
             <ReactFlowProvider>
-              <SidebarEventos />
+                <SidebarEventos />
                 <div className="reactflow-wrapper" ref={reactFlowWrapper}>
                     <ReactFlow
                         nodes={nodes}
@@ -145,7 +170,7 @@ const Flow = () => {
                         onDragOver={onDragOver}
                         nodeTypes={nodeTypes}
                         fitView
-                        
+
                     >
                         <Controls />
                         <Background />
@@ -159,23 +184,46 @@ const Flow = () => {
                 </div>
                 <SidebarAcoes />
                 <Modal
+                    size="lg"
                     show={show}
-                    onHide={handleClose}
                     backdrop="static"
                     keyboard={false}
                 >
-                    <Modal.Header closeButton>
-                        <Modal.Title>Modal title</Modal.Title>
+                    <Modal.Header >
+                        <Row>
+                            <Col xs="auto"><Modal.Title>Enviar E-mail</Modal.Title></Col>
+
+                            <Col xs="auto"><Button variant="outline-primary" id="button-addon2">
+                                Enviar para o destinatario principal
+                            </Button></Col>
+                        </Row>
                     </Modal.Header>
+
                     <Modal.Body>
-                        I will not close if you click outside me. Don't even try to press
-                        escape key.
+                        <Form>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <InputGroup className="mb-3">
+                                    <InputGroup.Text>Adicionar destinatario: </InputGroup.Text>
+                                    <FloatingLabel label="E-mail">
+                                        <Form.Control type="email" id="newEmail" placeholder="nome@email.com" style={{ borderRadius: 0, width: 450 }} />
+                                    </FloatingLabel>
+                                    <Button variant="outline-primary" id="button-addon2" onClick={handleAddEmail}>
+                                        Adicionar
+                                    </Button>
+                                </InputGroup>
+                            </Form.Group>
+                        </Form>
+                        <hr />
+                        <p>Destinatarios Selecionados:</p>
+                        <ul id="listaDestinatarios">
+
+                        </ul>
+
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
-                            Close
+                        <Button variant="primary" onClick={handleCloseEmail}>
+                            SELECIONAR
                         </Button>
-                        <Button variant="primary">Understood</Button>
                     </Modal.Footer>
                 </Modal>
             </ReactFlowProvider>

@@ -1,5 +1,6 @@
 .send-email-node {
-    width: 100%;
+    height: auto;
+    width: auto;
     border: 1px solid #FFA500;
     padding: 7px;
     border-radius: 12px;
