@@ -12,10 +12,13 @@ export default () => {
   return (
     <aside>
       <h3>Ações</h3>
-          <hr/>
+          <hr />
+          <h5>Comunicação</h5>
+          
           <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'sendEmail', 'Enviar e-mail Node')} draggable>
               Enviar e-mail
           </div>
+          <hr />
     </aside>
   );
 };
