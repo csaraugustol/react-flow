@@ -14,7 +14,12 @@ export default () => {
       <h3>Ações</h3>
           <hr />
           <h5>Comunicação</h5>
-          
+          <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'sendSms', 'Enviar SMS Node')} draggable>
+              Enviar SMS
+          </div>
+          <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'sendWhatsapp', 'Enviar WhatsApp Node')} draggable>
+              Enviar WhatsApp
+          </div>
           <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'sendEmail', 'Enviar e-mail Node')} draggable>
               Enviar e-mail
           </div>
