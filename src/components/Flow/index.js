@@ -73,14 +73,9 @@ const Flow = () => {
         let newValue = document.getElementById("newEmail");
         var li = document.createElement("li");
 
-        
-        li.onclick = function () {
-            lista.removeChild(li);
-        };
-        debugger
-
         li.value = newValue.value;
         li.innerHTML = `${newValue.value}`;
+        li.title = "REMOVER";
         lista.appendChild(li);
 
         var lis = lista.getElementsByTagName('li');
@@ -92,6 +87,19 @@ const Flow = () => {
         }
 
         localStorage.setItem("listaDestinatarios", arrayLS);
+
+        li.onclick = function () {
+            lista.removeChild(li);
+            var lis = lista.getElementsByTagName('li');
+
+            const arrayLS = [];
+
+            for (let i = 0; i <= lis.length - 1; i++) {
+                arrayLS.push(lis[i].innerHTML);
+            }
+
+            localStorage.setItem("listaDestinatarios", arrayLS);
+        };
 
         newValue.value = "";
     };
