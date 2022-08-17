@@ -1,34 +1,45 @@
 import './SelectUpdaterNode.css'
-import { useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { Handle, Position } from 'react-flow-renderer';
 
-const handleStyle = { left: 10 };
 
 function SelectUpdaterNode({ data }) {
-  const onChange = useCallback((evt) => {
-    console.log(evt.target.value);
-  }, []);
 
-  return (
-    <div className="select-updater-node">
-      <Handle type="target" position={Position.Top} />
-      <div>
-        <label htmlFor="select">Atraso na entrega</label>
-        <select id="select" name="select" onChange={onChange} >
-          <option value="1">Igual</option>
-          <option value="2">Maior que</option>
-          <option value="3">Maior ou igual</option>
-          <option value="4">Menor ou igual</option>
-          <option value="5">Menor</option>
-        </select>
-        <div>
-          <input placeholder='Número de dias' type='number'/>
+    const handleStyle = { left: 10 };
+
+    const onChangeSelect = useCallback((evt) => {
+        console.log(evt.target.value);
+    }, []);
+
+    const onChangeText = useCallback((evt) => {
+        console.log(evt.target.value);
+
+    }, []);
+
+    return (
+        <div className="select-updater-node">
+            {/*<Handle type="target" position={Position.Top} />*/}
+            <div>
+                <label htmlFor="select">Atraso na coleta</label>
+                <select id="action" name="select" onChange={onChangeSelect} >
+                    <option value="Maior que"> Maior que </option>
+                    <option value="Igual"> Igual a </option>
+                    <option value="Menor"> Menor que </option>
+                    <option value="Menor ou igual"> Menor ou igual a </option>
+                    <option value="Maior ou igual"> Maior ou igual a </option>
+                </select>
+                <div className="dias">
+                    <input id="time" type="number" onChange={onChangeText} /> Dias
+                </div>
+            </div>
+            {/* <Handle type="source" position={Position.Bottom} id="a" style={handleStyle} /> */}
+            {/* <Handle type="source" position={Position.Bottom} id="b" />*/}
+            <Handle
+                type="source"
+                position="right"
+            />
         </div>
-      </div>
-      {/* <Handle type="source" position={Position.Bottom} id="a" style={handleStyle} /> */}
-      <Handle type="source" position={Position.Bottom} id="b" />
-    </div>
-  );
+    );
 }
 
 export default SelectUpdaterNode;

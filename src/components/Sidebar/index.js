@@ -27,9 +27,13 @@ export default () => {
       <div className="dndnode text-updater" onDragStart={(event) => onDragStart(event, 'textUpdater', 'Text Updater Node')} draggable>
         Text Updater Node
       </div>
-      <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectUpdater', 'Select Updater Node')} draggable>
-        Select Updater Node
-      </div>
+          <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectUpdater', 'Atraso na coleta Node')} draggable>
+        Atraso na coleta
+       </div>
+          <hr/>
+          <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'sendEmail', 'Enviar e-mail Node')} draggable>
+              Enviar e-mail
+          </div>
     </aside>
   );
 };
