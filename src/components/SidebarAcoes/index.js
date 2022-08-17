@@ -11,7 +11,7 @@ export default () => {
 
   return (
     <aside>
-      <h3>Ações</h3>
+          <h3 className='titulo'>Ações</h3>
           <hr />
           <h5>Comunicação</h5>
           <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'sendSms', 'Enviar SMS Node')} draggable>

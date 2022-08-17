@@ -1,4 +1,4 @@
-.send-email-node {
+.send-wpp-node {
     height: auto;
     width: auto;
     border: 1px solid #FFA500;
@@ -10,7 +10,7 @@
     justify-content: center;
 }
 
-    .send-email-node:hover {
+    .send-wpp-node:hover {
         background: #FFA500;
         border: 1px solid #FF8C00;
         box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);

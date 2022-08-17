@@ -27,18 +27,19 @@ import Row from 'react-bootstrap/Row';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import SendSMSNode from '../SendSMSNode/index';
+import SendWPPNode from '../SendWPPNode/index';
 
-const initialNodes = [
-    {
-        id: '1',
-        type: 'input',
-        data: { label: 'Input Node' },
-        position: { x: 250, y: 5 },
-        sourcePosition: 'right',
-        targetPosition: 'left',
-        className: 'base-node input-node-inicial'
-    }
-];
+//const initialNodes = [
+    //{
+    //    id: '1',
+    //    type: 'input',
+    //    data: { label: 'Input Node' },
+    //    position: { x: 250, y: 5 },
+    //    sourcePosition: 'right',
+    //    targetPosition: 'left',
+    //    className: 'base-node input-node-inicial'
+    //}
+//];
 
 // const initialEdges = [
 //   { id: '1', source: '1', sourceHandle: 'a', target: '3' },
@@ -53,6 +54,7 @@ const nodeTypes = {
     selectAtrasoColeta: SelectAtrasoColeta,
     sendEmail: SendEmailNode,
     sendSms: SendSMSNode,
+    sendWhatsapp: SendWPPNode,
     selectAtrasoEntrega: SelectAtrasoEntrega,
     selectDivergenciaValor: SelectDivergenciaValor,
     selectDivergenciaValorFrete: SelectDivergenciaValorFrete,
@@ -61,12 +63,16 @@ const nodeTypes = {
 
 const Flow = () => {
     const reactFlowWrapper = useRef(null);
-    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+    const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const [reactFlowInstance, setReactFlowInstance] = useState(null);
     const { setViewport } = useReactFlow();
     const [showEmail, setShowEmail] = useState(false);
     const [showSMS, setShowSMS] = useState(false);
+    const [showWPP, setShowWPP] = useState(false);
+
+    const handleCloseWPP = () => setShowWPP(false);
+    const handleShowWPP = () => setShowWPP(true);
 
     const handleCloseSMS = () => setShowSMS(false);
     const handleShowSMS = () => setShowSMS(true);
@@ -146,6 +152,43 @@ const Flow = () => {
 
         newValue.value = "";
     };
+    const handleAddWPP = () => {
+
+        let lista = document.getElementById("listaDestinatariosWPP");
+        let newValue = document.getElementById("newWPP");
+        var li = document.createElement("li");
+
+        li.value = newValue.value;
+        li.innerHTML = `${newValue.value}`;
+        li.title = "REMOVER";
+        lista.appendChild(li);
+
+        var lis = lista.getElementsByTagName('li');
+
+        const arrayLS = [];
+
+        for (let i = 0; i <= lis.length - 1; i++) {
+            arrayLS.push(lis[i].innerHTML);
+        }
+
+        localStorage.setItem("listaDestinatariosWPP", arrayLS);
+
+        li.onclick = function () {
+            lista.removeChild(li);
+            var lis = lista.getElementsByTagName('li');
+
+            const arrayLS = [];
+
+            for (let i = 0; i <= lis.length - 1; i++) {
+                arrayLS.push(lis[i].innerHTML);
+            }
+
+            localStorage.setItem("listaDestinatariosWPP", arrayLS);
+        };
+
+        newValue.value = "";
+    };
+
 
     const handleAddAndCloseEmail = () => {
 
@@ -166,7 +209,17 @@ const Flow = () => {
 
         handleCloseSMS();
     };
-    
+
+    const handleAddAndCloseWPP = () => {
+
+        //get destinatario principal
+        let destinatarioPrincipal = "(32) 91234-5678";
+
+        localStorage.setItem("listaDestinatariosWPP", destinatarioPrincipal);
+
+        handleCloseSMS();
+    };
+
     const flowKey = 'flow-token-123';
 
     const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
@@ -198,6 +251,10 @@ const Flow = () => {
 
             if (type === 'sendSms') {
                 handleShowSMS();
+            }
+
+            if (type === 'sendWhatsapp') {
+                handleShowWPP();
             }
 
             const position = reactFlowInstance.project({
@@ -363,6 +420,50 @@ const Flow = () => {
                     </Modal.Footer>
                 </Modal>
                 {/*Modal WHATSAPP*/}
+                <Modal
+                    size="lg"
+                    show={showWPP}
+                    backdrop="static"
+                    keyboard={false}
+                    onHide={() => setShowWPP(false)}
+                >
+                    <Modal.Header closeButton>
+                        <Row>
+                            <Col xs="auto"><Modal.Title>Enviar mensagem WhatsApp</Modal.Title></Col>
+
+                            <Col xs="auto"><Button variant="outline-primary" id="button-addon2" onClick={handleAddAndCloseWPP}>
+                                Enviar para o destinatario principal
+                            </Button></Col>
+                        </Row>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group className="mb-3" controlId="formBasicWPP">
+                                <InputGroup className="mb-3">
+                                    <InputGroup.Text>Adicionar destinatario: </InputGroup.Text>
+                                    <FloatingLabel label="(DDD) + Numero">
+                                        <Form.Control type="text" id="newWPP" placeholder="(DDD) 9 1234-5678" style={{ borderRadius: 0, width: 450 }} />
+                                    </FloatingLabel>
+                                    <Button variant="outline-primary" id="button-addon2" onClick={handleAddWPP}>
+                                        Adicionar
+                                    </Button>
+                                </InputGroup>
+                            </Form.Group>
+                        </Form>
+                        <hr />
+                        <p>Destinatarios Selecionados:</p>
+                        <ul id="listaDestinatariosWPP">
+
+                        </ul>
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleCloseWPP}>
+                            SELECIONAR
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </ReactFlowProvider>
         </div>
     );

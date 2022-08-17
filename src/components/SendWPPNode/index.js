@@ -1,13 +1,13 @@
-import './SendEmailNode.css'
+import './SendWPPNode.css'
 import React, { useState, useRef, useCallback } from 'react';
 import { Handle, Position } from 'react-flow-renderer';
 
 
-function SendEmailNode({ data }) {
+function SendWPPNode({ data }) {
 
     const handleStyle = { left: 10 };
 
-    const labelData = [localStorage.getItem("listaDestinatarios")];
+    const labelData = [localStorage.getItem("listaDestinatariosWPP")];
     let labelDataSplitted = [];
     if (labelData[0] != null) {
         
@@ -22,7 +22,7 @@ function SendEmailNode({ data }) {
             
             <div>
                 <ul>
-                    <li style={{ listStyleType: 'none' }}>Enviar e-mail para:</li>
+                    <li style={{ listStyleType: 'none' }}>Enviar mensagem WhatsApp para:</li>
                     
 
 
@@ -39,4 +39,4 @@ function SendEmailNode({ data }) {
     );
 }
 
-export default SendEmailNode;
+export default SendWPPNode;
