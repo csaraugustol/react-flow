@@ -7,7 +7,7 @@ function SendEmailNode({ data }) {
 
     const handleStyle = { left: 10 };
 
-    const labelData = [localStorage.getItem("listaDestinatariosEmail")];
+    const labelData = [localStorage.getItem("listaDestinatarios")];
     let labelDataSplitted = [];
     if (labelData[0] != null) {
         

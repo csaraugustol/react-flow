@@ -26,6 +26,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import SendSMSNode from '../SendSMSNode/index';
 
 const initialNodes = [
     {
@@ -51,6 +52,7 @@ const nodeTypes = {
     textUpdater: TextUpdaterNode,
     selectAtrasoColeta: SelectAtrasoColeta,
     sendEmail: SendEmailNode,
+    sendSms: SendSMSNode,
     selectAtrasoEntrega: SelectAtrasoEntrega,
     selectDivergenciaValor: SelectDivergenciaValor,
     selectDivergenciaValorFrete: SelectDivergenciaValorFrete,
@@ -63,13 +65,18 @@ const Flow = () => {
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const [reactFlowInstance, setReactFlowInstance] = useState(null);
     const { setViewport } = useReactFlow();
-    const [show, setShow] = useState(false);
+    const [showEmail, setShowEmail] = useState(false);
+    const [showSMS, setShowSMS] = useState(false);
 
-    const handleCloseEmail = () => setShow(false);
-    const handleShowEmail = () => setShow(true);
+    const handleCloseSMS = () => setShowSMS(false);
+    const handleShowSMS = () => setShowSMS(true);
+
+    const handleCloseEmail = () => setShowEmail(false);
+    const handleShowEmail = () => setShowEmail(true);
+
     const handleAddEmail = () => {
 
-        let lista = document.getElementById("listaDestinatarios");
+        let lista = document.getElementById("listaDestinatariosEmail");
         let newValue = document.getElementById("newEmail");
         var li = document.createElement("li");
 
@@ -86,7 +93,7 @@ const Flow = () => {
             arrayLS.push(lis[i].innerHTML);
         }
 
-        localStorage.setItem("listaDestinatarios", arrayLS);
+        localStorage.setItem("listaDestinatariosEmail", arrayLS);
 
         li.onclick = function () {
             lista.removeChild(li);
@@ -98,7 +105,43 @@ const Flow = () => {
                 arrayLS.push(lis[i].innerHTML);
             }
 
-            localStorage.setItem("listaDestinatarios", arrayLS);
+            localStorage.setItem("listaDestinatariosEmail", arrayLS);
+        };
+
+        newValue.value = "";
+    };
+    const handleAddSMS = () => {
+
+        let lista = document.getElementById("listaDestinatariosSMS");
+        let newValue = document.getElementById("newSMS");
+        var li = document.createElement("li");
+
+        li.value = newValue.value;
+        li.innerHTML = `${newValue.value}`;
+        li.title = "REMOVER";
+        lista.appendChild(li);
+
+        var lis = lista.getElementsByTagName('li');
+
+        const arrayLS = [];
+
+        for (let i = 0; i <= lis.length - 1; i++) {
+            arrayLS.push(lis[i].innerHTML);
+        }
+
+        localStorage.setItem("listaDestinatariosSMS", arrayLS);
+
+        li.onclick = function () {
+            lista.removeChild(li);
+            var lis = lista.getElementsByTagName('li');
+
+            const arrayLS = [];
+
+            for (let i = 0; i <= lis.length - 1; i++) {
+                arrayLS.push(lis[i].innerHTML);
+            }
+
+            localStorage.setItem("listaDestinatariosSMS", arrayLS);
         };
 
         newValue.value = "";
@@ -109,9 +152,19 @@ const Flow = () => {
         //get destinatario principal
         let destinatarioPrincipal = "destinatario@principal.com";
 
-        localStorage.setItem("listaDestinatarios", destinatarioPrincipal);
+        localStorage.setItem("listaDestinatariosEmail", destinatarioPrincipal);
 
         handleCloseEmail();
+    };
+
+    const handleAddAndCloseSMS = () => {
+
+        //get destinatario principal
+        let destinatarioPrincipal = "(32) 91234-5678";
+
+        localStorage.setItem("listaDestinatariosSMS", destinatarioPrincipal);
+
+        handleCloseSMS();
     };
     
     const flowKey = 'flow-token-123';
@@ -140,8 +193,11 @@ const Flow = () => {
             }
 
             if (type === 'sendEmail') {
-                console.log(label);
                 handleShowEmail();
+            }
+
+            if (type === 'sendSms') {
+                handleShowSMS();
             }
 
             const position = reactFlowInstance.project({
@@ -216,12 +272,13 @@ const Flow = () => {
                     <button className='btn-restore' onClick={onRestore}>Restore</button>
                 </div>
                 <SidebarAcoes />
+                {/*Modal EMAIL*/}
                 <Modal
                     size="lg"
-                    show={show}
+                    show={showEmail}
                     backdrop="static"
                     keyboard={false}
-                    onHide={() => setShow(false)}
+                    onHide={() => setShowEmail(false)}
                 >
                     <Modal.Header closeButton>
                         <Row>
@@ -249,7 +306,7 @@ const Flow = () => {
                         </Form>
                         <hr />
                         <p>Destinatarios Selecionados:</p>
-                        <ul id="listaDestinatarios">
+                        <ul id="listaDestinatariosEmail">
 
                         </ul>
 
@@ -260,6 +317,52 @@ const Flow = () => {
                         </Button>
                     </Modal.Footer>
                 </Modal>
+                {/*Modal SMS*/}
+                <Modal
+                    size="lg"
+                    show={showSMS}
+                    backdrop="static"
+                    keyboard={false}
+                    onHide={() => setShowSMS(false)}
+                >
+                    <Modal.Header closeButton>
+                        <Row>
+                            <Col xs="auto"><Modal.Title>Enviar SMS</Modal.Title></Col>
+
+                            <Col xs="auto"><Button variant="outline-primary" id="button-addon2" onClick={handleAddAndCloseSMS}>
+                                Enviar para o destinatario principal
+                            </Button></Col>
+                        </Row>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group className="mb-3" controlId="formBasicSMS">
+                                <InputGroup className="mb-3">
+                                    <InputGroup.Text>Adicionar destinatario: </InputGroup.Text>
+                                    <FloatingLabel label="(DDD) + Numero">
+                                        <Form.Control type="text" id="newSMS" placeholder="(DDD) 9 1234-5678" style={{ borderRadius: 0, width: 450 }} />
+                                    </FloatingLabel>
+                                    <Button variant="outline-primary" id="button-addon2" onClick={handleAddSMS}>
+                                        Adicionar
+                                    </Button>
+                                </InputGroup>
+                            </Form.Group>
+                        </Form>
+                        <hr />
+                        <p>Destinatarios Selecionados:</p>
+                        <ul id="listaDestinatariosSMS">
+
+                        </ul>
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleCloseSMS}>
+                            SELECIONAR
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                {/*Modal WHATSAPP*/}
             </ReactFlowProvider>
         </div>
     );

@@ -1,13 +1,13 @@
-import './SendEmailNode.css'
+import './SendSMSNode.css'
 import React, { useState, useRef, useCallback } from 'react';
 import { Handle, Position } from 'react-flow-renderer';
 
 
-function SendEmailNode({ data }) {
+function SendSMSNode({ data }) {
 
     const handleStyle = { left: 10 };
 
-    const labelData = [localStorage.getItem("listaDestinatariosEmail")];
+    const labelData = [localStorage.getItem("listaDestinatariosSMS")];
     let labelDataSplitted = [];
     if (labelData[0] != null) {
         
@@ -22,7 +22,7 @@ function SendEmailNode({ data }) {
             
             <div>
                 <ul>
-                    <li style={{ listStyleType: 'none' }}>Enviar e-mail para:</li>
+                    <li style={{ listStyleType: 'none' }}>Enviar SMS para:</li>
                     
 
 
@@ -39,4 +39,4 @@ function SendEmailNode({ data }) {
     );
 }
 
-export default SendEmailNode;
+export default SendSMSNode;
