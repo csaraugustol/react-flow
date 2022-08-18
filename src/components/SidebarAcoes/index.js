@@ -1,5 +1,8 @@
 import './SidebarAcoes.css';
 import React, { Children } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FaPlusCircle } from 'react-icons/fa';
+import { FaTimesCircle } from 'react-icons/fa';
 
 export default () => {
 
@@ -10,7 +13,7 @@ export default () => {
   };
 
 
-  var abrir = document.getElementById('btn-menu');
+  var abrir = document.getElementById('btn-menu-acoes');
   var sidebarAcoes = document.getElementById('sidebar-acoes');
 
   function chamaMenu() {
@@ -25,11 +28,11 @@ export default () => {
 
   return (
     <aside className='aside-acoes'>
-      <button id='btn-menu' className='btn-menu' onClick={() => chamaMenu()}>Ações</button>
+      <button id='btn-menu-acoes' onClick={() => chamaMenu()}><FaPlusCircle className='name'/>Ações</button>
       <div id='sidebar-acoes' className='sidebar-acoes'>
         <div className='cabecalho-sidebar-acoes'>
           <h3>Ações</h3>
-          <button id='btn-close' className='btn-close' onClick={() => fecharMenu()}></button>
+          <button className='btn-fechar' onClick={() => fecharMenu()}><FaTimesCircle /></button>
         </div>
         <hr />
         <h5>Comunicação</h5>

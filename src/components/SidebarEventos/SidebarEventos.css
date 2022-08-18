@@ -107,14 +107,17 @@ aside .description {
     width: 110%;
 }
 
+.aside-eventos .save__controls {
+    justify-content: space-between;
+    display: flex;
+}
+
 .aside-eventos .save__controls .btn-save, .aside-eventos .save__controls .btn-restore {
     text-align: center;
     width: 100px;
     height: 30px;
     font-weight: bold;
-    margin-top: 5px;
     border-radius: 12px;
-    margin-right: 5px;
   }
   
   .aside-eventos .save__controls .btn-save {

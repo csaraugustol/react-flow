@@ -98,7 +98,7 @@ const Flow = () => {
         li.title = "REMOVER";
         lista.appendChild(li);
 
-        var lis = lista.getElementsByTagName('li');
+        var lis = lista.getElementsByTagName('li');        
 
         const arrayLS = [];
         
