@@ -62,8 +62,9 @@ function SendEmailNode({ data }) {
 
 
         let lista = document.getElementById("listaDestinatariosEmail");
+        
         let li = e.target;
-        li.remove();
+        removeTeste(li);
         var lis = lista.getElementsByTagName('li');
 
         const arrayLS = [];
@@ -76,7 +77,9 @@ function SendEmailNode({ data }) {
 
     }
 
-
+    function removeTeste(li) {
+        li.remove();
+    }
 
     return (
 
