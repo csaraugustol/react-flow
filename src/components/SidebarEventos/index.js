@@ -24,8 +24,8 @@ export default () => {
       </div>
       <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectDivergenciaValorFrete', 'Divergencia no valor do frete Node')} draggable>
         Divergência no valor do frete
-      </div>
-      <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectEventos', 'Eventos Node')} draggable>
+          </div>
+       <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectEventos', 'Eventos Node')} draggable>
         Eventos
       </div>
     </aside>

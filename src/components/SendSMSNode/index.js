@@ -29,8 +29,10 @@ function SendSMSNode({ data }) {
                     {labelDataSplitted.map(item => <li key={item}>{item}</li>) }
                 </ul>
             </div>
-            {/* <Handle type="source" position={Position.Bottom} id="a" style={handleStyle} /> */}
-            {/* <Handle type="source" position={Position.Bottom} id="b" />*/}
+            <Handle
+                type="source"
+                position="right"
+            />
             <Handle
                 type="target"
                 position="left"

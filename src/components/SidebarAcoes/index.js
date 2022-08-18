@@ -33,8 +33,8 @@ export default () => {
           Enviar e-mail
         </div>
         <hr />
-          <h5>Ação</h5>
-          <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'default', 'Default')} draggable>
+        <h5>Ação</h5>
+          <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'sendHTTP', 'Enviar HTTP Node')} draggable>
               HTTP Request
           </div>
       </div>

@@ -28,6 +28,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import SendSMSNode from '../SendSMSNode/index';
 import SendWPPNode from '../SendWPPNode/index';
+import SendHTTPNode from '../SendHTTPNode/index';
 
 //const initialNodes = [
     //{
@@ -55,6 +56,7 @@ const nodeTypes = {
     sendEmail: SendEmailNode,
     sendSms: SendSMSNode,
     sendWhatsapp: SendWPPNode,
+    sendHTTP: SendHTTPNode,
     selectAtrasoEntrega: SelectAtrasoEntrega,
     selectDivergenciaValor: SelectDivergenciaValor,
     selectDivergenciaValorFrete: SelectDivergenciaValorFrete,
@@ -70,6 +72,7 @@ const Flow = () => {
     const [showEmail, setShowEmail] = useState(false);
     const [showSMS, setShowSMS] = useState(false);
     const [showWPP, setShowWPP] = useState(false);
+    const [showHTTP, setShowHTTP] = useState(false);
 
     const handleCloseWPP = () => setShowWPP(false);
     const handleShowWPP = () => setShowWPP(true);
@@ -79,6 +82,9 @@ const Flow = () => {
 
     const handleCloseEmail = () => setShowEmail(false);
     const handleShowEmail = () => setShowEmail(true);
+
+    const handleCloseHTTP = () => setShowHTTP(false);
+    const handleShowHTTP = () => setShowHTTP(true);
 
     const handleAddEmail = () => {
 
@@ -257,6 +263,10 @@ const Flow = () => {
                 handleShowWPP();
             }
 
+            if (type === 'sendHTTP') {
+                handleShowHTTP();
+            }
+
             const position = reactFlowInstance.project({
                 x: event.clientX - reactFlowBounds.left,
                 y: event.clientY - reactFlowBounds.top,
@@ -272,7 +282,7 @@ const Flow = () => {
                 data: { label: `${label}` },
                 className: 'base-node ' + nameOfClass.toLowerCase(),
             };
-
+            
             setNodes((nds) => nds.concat(newNode));
         },
         [reactFlowInstance]
@@ -460,6 +470,65 @@ const Flow = () => {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" onClick={handleCloseWPP}>
+                            SELECIONAR
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                {/*Modal HTTP*/}
+                <Modal
+                    size="lg"
+                    show={showHTTP}
+                    backdrop="static"
+                    keyboard={false}
+                    onHide={() => setShowHTTP(false)}
+                >
+                    <Modal.Header closeButton>
+                        <Row>
+                            <Col xs="auto"><Modal.Title>HTTP REQUEST</Modal.Title></Col>
+                        </Row>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group className="mb-3" controlId="formBasicWPP">
+                                <InputGroup className="mb-3">
+                                    <InputGroup.Text>URL</InputGroup.Text>
+                                    <FloatingLabel label="http://">
+                                        <Form.Control type="text" id="urlHTTP" placeholder="http://" style={{ borderRadius: 0, width: 450 }} />
+                                    </FloatingLabel>
+                                    <Button variant="outline-primary" id="button-addon2" >
+                                        Load data
+                                    </Button>
+                                </InputGroup>
+                            </Form.Group>
+                        
+                        <hr />
+                        <p>Tipo de metodo:</p>
+                        {[ 'radio'].map((type) => (
+                            <div key={`inline-${type}`} className="mb-3">
+                                <Form.Check
+                                    inline
+                                    label="GET"
+                                    name="group1"
+                                    type={type}
+                                    id={`inline-${type}-1`}
+                                />
+                                <Form.Check
+                                    inline
+                                    label="POST"
+                                    name="group1"
+                                    type={type}
+                                    id={`inline-${type}-2`}
+                                />
+                            </div>
+                        ))}
+                        <hr />
+                        
+
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleCloseHTTP}>
                             SELECIONAR
                         </Button>
                     </Modal.Footer>
