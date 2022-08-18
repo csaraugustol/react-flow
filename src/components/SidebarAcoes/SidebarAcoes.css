@@ -48,12 +48,12 @@
     background-color: #4B0082;
 }*/
 
-.dndnode.select-updater {
+.dndnode.select-updater, #btn-menu-acoes {
     border-color: #FF8C00;
     color: #FF8C00;
 }
 
-.dndnode.select-updater:hover {
+.dndnode.select-updater:hover, #btn-menu-acoes:hover {
     color: #ffffff;
     background-color: #FF8C00;
 }
@@ -116,4 +116,34 @@ aside .description {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.cabecalho-sidebar-acoes button {
+    padding: 0px;
+    align-items: flex-end;
+}
+
+.cabecalho-sidebar-acoes h3 {
+    padding: 0px;
+    margin: 0;
+}
+
+.cabecalho-sidebar-acoes .btn-fechar {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+
+#btn-menu-acoes {
+    padding: 5px;
+    font-weight: bold;
+    line-height: 0;
+    border: 1px solid;
+}
+
+.name {
+    margin-right: 10px;
 }

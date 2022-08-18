@@ -25,24 +25,6 @@
   }
 }
 
-.save__controls .btn-save, .save__controls .btn-restore {
-  text-align: center;
-  width: 100px;
-  height: 30px;
-  font-weight: bold;
-  margin-top: 5px;
-  border-radius: 12px;
-  margin-right: 5px;
-}
-
-.save__controls .btn-save {
-  background-color: rgb(12, 161, 31);
-}
-
-.save__controls .btn-restore {
-  background-color: rgb(254, 0, 0);
-}
-
 .base-node {
   font-weight: bold;
   border-radius: 12px;
