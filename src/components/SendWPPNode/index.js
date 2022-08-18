@@ -16,7 +16,7 @@ function SendWPPNode({ data }) {
         
 
     return (
-        <div className="send-email-node">
+        <div className="send-wpp-node">
             {/*<Handle type="target" position={Position.Top} />*/}
             
             
@@ -24,13 +24,13 @@ function SendWPPNode({ data }) {
                 <ul>
                     <li style={{ listStyleType: 'none' }}>Enviar mensagem WhatsApp para:</li>
                     
-
-
                     {labelDataSplitted.map(item => <li key={item}>{item}</li>) }
                 </ul>
             </div>
-            {/* <Handle type="source" position={Position.Bottom} id="a" style={handleStyle} /> */}
-            {/* <Handle type="source" position={Position.Bottom} id="b" />*/}
+            <Handle
+                type="source"
+                position="right"
+            />
             <Handle
                 type="target"
                 position="left"
