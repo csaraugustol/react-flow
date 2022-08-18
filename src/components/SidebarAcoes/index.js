@@ -12,7 +12,6 @@ export default () => {
 
   var abrir = document.getElementById('btn-menu');
   var sidebarAcoes = document.getElementById('sidebar-acoes');
-  var teste = document.getElementById('teste');
 
   function chamaMenu() {
     sidebarAcoes.style.display = 'block';

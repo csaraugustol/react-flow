@@ -28,6 +28,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import SendSMSNode from '../SendSMSNode/index';
 import SendWPPNode from '../SendWPPNode/index';
+import { IMaskInput } from "react-imask";
 import SendHTTPNode from '../SendHTTPNode/index';
 
 //const initialNodes = [
@@ -334,11 +335,12 @@ const Flow = () => {
                     </ReactFlow>
                 </div>
 
-                <div className="save__controls">
+                {/* <div className="save__controls">
                     <button className='btn-save' onClick={onSave}>Save</button>
                     <button className='btn-restore' onClick={onRestore}>Restore</button>
-                </div>
+                </div> */}
                 <SidebarAcoes />
+                
                 {/*Modal EMAIL*/}
                 <Modal
                     size="lg"
@@ -408,7 +410,7 @@ const Flow = () => {
                                 <InputGroup className="mb-3">
                                     <InputGroup.Text>Adicionar destinatario: </InputGroup.Text>
                                     <FloatingLabel label="(DDD) + Numero">
-                                        <Form.Control type="text" id="newSMS" placeholder="(DDD) 9 1234-5678" style={{ borderRadius: 0, width: 450 }} />
+                                        <Form.Control as={IMaskInput} mask="(00) 0 0000-0000" type="text" id="newSMS" placeholder="(DDD) 9 1234-5678" style={{ borderRadius: 0, width: 450 }} />
                                     </FloatingLabel>
                                     <Button variant="outline-primary" id="button-addon2" onClick={handleAddSMS}>
                                         Adicionar
@@ -453,7 +455,7 @@ const Flow = () => {
                                 <InputGroup className="mb-3">
                                     <InputGroup.Text>Adicionar destinatario: </InputGroup.Text>
                                     <FloatingLabel label="(DDD) + Numero">
-                                        <Form.Control type="text" id="newWPP" placeholder="(DDD) 9 1234-5678" style={{ borderRadius: 0, width: 450 }} />
+                                        <Form.Control as={IMaskInput} mask="(00) 0 0000-0000" type="text" id="newWPP" placeholder="(DDD) 9 1234-5678" style={{ borderRadius: 0, width: 450 }} />
                                     </FloatingLabel>
                                     <Button variant="outline-primary" id="button-addon2" onClick={handleAddWPP}>
                                         Adicionar
@@ -534,7 +536,9 @@ const Flow = () => {
                     </Modal.Footer>
                 </Modal>
             </ReactFlowProvider>
+            
         </div>
+        
     );
 };
 
