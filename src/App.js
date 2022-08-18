@@ -1,12 +1,19 @@
 import './App.css';
 import { useState } from 'react';
 import Flow from './components/Flow';
+import SidebarAcoes from './components/SidebarAcoes';
 
 function App() {
   return (
-    <div className='tamanho-tela'>
+    <div>
+      {/* <div>
+        <SidebarAcoes />
+      </div> */}
+      <div className='tamanho-tela'>
       <Flow />
       </div>
+      
+    </div>
 
   );
 }

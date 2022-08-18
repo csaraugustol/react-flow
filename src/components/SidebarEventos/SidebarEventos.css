@@ -106,3 +106,34 @@ aside .description {
 .dndnode.text-updater:hover:after {
     width: 110%;
 }
+
+.aside-eventos .save__controls .btn-save, .aside-eventos .save__controls .btn-restore {
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    font-weight: bold;
+    margin-top: 5px;
+    border-radius: 12px;
+    margin-right: 5px;
+  }
+  
+  .aside-eventos .save__controls .btn-save {
+    background-color: rgb(12, 161, 31);
+  }
+  
+  .aside-eventos .save__controls .btn-restore {
+    background-color: rgb(224, 0, 0);
+  }
+
+  .aside-eventos .save__controls .btn-save:hover {
+    background-color: rgb(49, 204, 70);
+  }
+  
+  .aside-eventos .save__controls .btn-restore:hover {
+    background-color: rgb(255, 41, 41);
+  }
+
+  .aside-eventos .acoes .dndnode {
+    height: 40px;
+  }
+  
