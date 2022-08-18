@@ -1,8 +1,7 @@
-.dndnode {
-    height: 20px;
+.aside-acoes .dndnode {
+    height: 40px;
     padding: 4px;
     border: 1px solid #000000;
-    border-radius: 12px;
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
@@ -104,15 +103,21 @@ aside .description {
 }
 
 .sidebar-acoes {
-    /* display: none; */
+    display: none;
     height: 100%;
-  }
-  
-  .btn-close {
-    background-color: #DAA520;
-  }
+}
 
-  .cabecalho-sidebar-acoes {
+.cabecalho-sidebar-acoes {
     display: flex;
     justify-content: space-between;
-  }
+}
+
+.cabecalho-sidebar-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.aside-acoes {
+    background-color: transparent;
+}
