@@ -45,15 +45,15 @@ export default () => {
         </div>
         <hr />
         <h5>Ação</h5>
-<<<<<<< HEAD
+
           <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'sendHTTP', 'Enviar HTTP Node')} draggable>
               HTTP Request
           </div>
-=======
+
         <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'default', 'Default')} draggable>
           HTTP Request
         </div>
->>>>>>> 46cbeb8e2afb6934fbabecdf73dd81fbfc1fa647
+
       </div>
     </aside>
   );
