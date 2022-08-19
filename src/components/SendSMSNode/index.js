@@ -176,7 +176,7 @@ function SendSMSNode({ data }) {
                     <hr />
                     <p>Destinatarios Selecionados:</p>
                     <Button variant="outline-warning" id="button-edit" onClick={handleEditSMSs}>
-                        Habilitar Edição <i className="fa fa-lock" id="lock" aria-hidden="true"></i>
+                        Habilitar EdiÃ§Ã£o <i className="fa fa-lock" id="lock" aria-hidden="true"></i>
 
                     </Button>
                     <ul id="listaDestinatariosSMS">
