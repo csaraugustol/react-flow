@@ -49,7 +49,7 @@ import SendHTTPNode from '../SendHTTPNode/index';
 // ];
 
 let id = 0;
-const getId = () => `dndnode_${id++}`;
+const getId = () => `${id++}`;
 
 const nodeTypes = {
     textUpdater: TextUpdaterNode,
@@ -289,10 +289,21 @@ const Flow = () => {
                 className: 'base-node ' + nameOfClass.toLowerCase(),
             };
 
+
+            let newEdge = {
+                id: `edge-${newNode.id}`, source: localStorage.getItem("lastId"), target: (parseInt(localStorage.getItem("lastId")) + 1).toString(),
+            };
+
+            localStorage.setItem("lastId", newNode.id);
+
+            setEdges((eds) => eds.concat(newEdge))
             setNodes((nds) => nds.concat(newNode));
+            
         },
         [reactFlowInstance]
     );
+
+    
 
     const onDoubleClick = useCallback(
         (event, nodeType, nodeLabel) => {
@@ -537,7 +548,7 @@ const Flow = () => {
                 {/*Modal HTTP*/}
                 <Modal
                     size="lg"
-                    show={true}
+                    show={showHTTP}
                     backdrop="static"
                     keyboard={false}
                     onHide={() => setShowHTTP(false)}
