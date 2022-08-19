@@ -224,7 +224,7 @@ const Flow = () => {
 
         localStorage.setItem("listaDestinatariosWPP", destinatarioPrincipal);
 
-        handleCloseSMS();
+        handleCloseWPP();
     };
 
     const flowKey = 'flow-token-123';
