@@ -31,22 +31,22 @@ import SendWPPNode from '../SendWPPNode/index';
 import { IMaskInput } from "react-imask";
 import SendHTTPNode from '../SendHTTPNode/index';
 
-const initialNodes = [
-    {
-       id: '1',
-       type: 'input',
-       data: { label: 'Input Node' },
-       position: { x: 250, y: 5 },
-       sourcePosition: 'right',
-       targetPosition: 'left',
-       className: 'base-node input-node-inicial'
-    }
-];
+// const initialNodes = [
+//     {
+//        id: '1',
+//        type: 'input',
+//        data: { label: 'Input Node' },
+//        position: { x: 250, y: 5 },
+//        sourcePosition: 'right',
+//        targetPosition: 'left',
+//        className: 'base-node input-node-inicial'
+//     }
+// ];
 
-const initialEdges = [
-  { id: '1', source: '1', sourceHandle: 'a', target: '3' },
-  { id: '2', source: '1', sourceHandle: 'b', target: '2' },
-];
+// const initialEdges = [
+//   { id: '1', source: '1', sourceHandle: 'a', target: '3' },
+//   { id: '2', source: '1', sourceHandle: 'b', target: '2' },
+// ];
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
