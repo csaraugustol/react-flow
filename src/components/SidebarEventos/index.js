@@ -7,6 +7,11 @@ export default (props) => {
     event.dataTransfer.setData('application/reactflow', nodeType);
     event.dataTransfer.setData('application/label', label);
     event.dataTransfer.effectAllowed = 'move';
+    event.dataTransfer.setData('application/duploClique', false);
+  };
+
+  const onDoubleClick = (event, nodeType, label) => {
+    props.onDoubleClick(event, nodeType, label);
   };
 
   return (
@@ -17,19 +22,19 @@ export default (props) => {
         <button className='btn-restore' onClick={props.onRestore}>Restaurar</button>
       </div>
       <hr />
-      <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectAtrasoColeta', 'Atraso na coleta Node')} draggable>
+      <div className="dndnode select-updater" onDoubleClick={(event) => onDoubleClick(event, 'selectAtrasoColeta', 'Atraso na coleta Node')} onDragStart={(event) => onDragStart(event, 'selectAtrasoColeta', 'Atraso na coleta Node')} draggable>
         Atraso na coleta
       </div>
-      <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectAtrasoEntrega', 'Atraso na entrega Node')} draggable>
+      <div className="dndnode select-updater" onDoubleClick={(event) => onDoubleClick(event, 'selectAtrasoEntrega', 'Atraso na entrega Node')} onDragStart={(event) => onDragStart(event, 'selectAtrasoEntrega', 'Atraso na entrega Node')} draggable>
         Atraso na entrega
       </div>
-      <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectDivergenciaValor', 'Divergencia de valor Node')} draggable>
+      <div className="dndnode select-updater" onDoubleClick={(event) => onDoubleClick(event, 'selectDivergenciaValor', 'Divergencia de valor Node')} onDragStart={(event) => onDragStart(event, 'selectDivergenciaValor', 'Divergencia de valor Node')} draggable>
         Divergência de valor
       </div>
-      <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectDivergenciaValorFrete', 'Divergencia no valor do frete Node')} draggable>
+      <div className="dndnode select-updater" onDoubleClick={(event) => onDoubleClick(event, 'selectDivergenciaValorFrete', 'Divergencia no valor do frete Node')} onDragStart={(event) => onDragStart(event, 'selectDivergenciaValorFrete', 'Divergencia no valor do frete Node')} draggable>
         Divergência no valor do frete
           </div>
-       <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectEventos', 'Eventos Node')} draggable>
+       <div className="dndnode select-updater" onDoubleClick={(event) => onDoubleClick(event, 'selectEventos', 'Eventos Node')} onDragStart={(event) => onDragStart(event, 'selectEventos', 'Eventos Node')} draggable>
         Eventos
       </div>
       {/* <div id='' className='acoes'>
