@@ -171,7 +171,7 @@ function SendEmailNode({ data }) {
                     <hr />
                     <p>Destinatarios Selecionados:</p>
                     <Button variant="outline-warning" id="button-edit" onClick={handleEditEmails}>
-                        Habilitar Edição <i className="fa fa-lock" id="lock" aria-hidden="true"></i>
+                    <i className="fa fa-lock" id="lock" aria-hidden="true"></i> Habilitar EdiÃ§Ã£o
 
                     </Button>
 

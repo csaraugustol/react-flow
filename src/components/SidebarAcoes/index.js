@@ -1,10 +1,9 @@
 import './SidebarAcoes.css';
 import React, { Children } from 'react';
-
 import { FaPlusCircle } from 'react-icons/fa';
 import { FaTimesCircle } from 'react-icons/fa';
 
-export default () => {
+export default (props) => {
 
   const onDragStart = (event, nodeType, label) => {
     event.dataTransfer.setData('application/reactflow', nodeType);
@@ -26,6 +25,10 @@ export default () => {
     abrir.style.display = 'block';
   };
 
+  const onDoubleClick = (event, nodeType, label) => {
+    props.onDoubleClick(event, nodeType, label);
+  };
+
   return (
     <aside className='aside-acoes'>
       <button id='btn-menu-acoes' onClick={() => chamaMenu()}><FaPlusCircle className='name'/>Ações</button>
@@ -36,18 +39,18 @@ export default () => {
         </div>
         <hr />
         <h5>Comunicação</h5>
-        <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'sendSms', 'Enviar SMS Node')} draggable>
+        <div className="dndnode select-updater" onDoubleClick={(event) => onDoubleClick(event, 'sendSms', 'Enviar SMS Node')} onDragStart={(event) => onDragStart(event, 'sendSms', 'Enviar SMS Node')} draggable>
           Enviar SMS
         </div>
-        <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'sendWhatsapp', 'Enviar WhatsApp Node')} draggable>
+        <div className="dndnode select-updater" onDoubleClick={(event) => onDoubleClick(event, 'sendWhatsapp', 'Enviar WhatsApp Node')} onDragStart={(event) => onDragStart(event, 'sendWhatsapp', 'Enviar WhatsApp Node')} draggable>
           Enviar WhatsApp
         </div>
-        <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'sendEmail', 'Enviar e-mail Node')} draggable>
+        <div className="dndnode select-updater" onDoubleClick={(event) => onDoubleClick(event, 'sendEmail', 'Enviar e-mail Node')} onDragStart={(event) => onDragStart(event, 'sendEmail', 'Enviar e-mail Node')} draggable>
           Enviar e-mail
         </div>
         <hr />
         <h5>Ação</h5>
-          <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'sendHTTP', 'Enviar HTTP Node')} draggable>
+          <div className="dndnode select-updater" onDoubleClick={(event) => onDoubleClick(event, 'sendHTTP', 'Enviar HTTP Node')} onDragStart={(event) => onDragStart(event, 'sendHTTP', 'Enviar HTTP Node')} draggable>
               HTTP Request
           </div>
       </div>

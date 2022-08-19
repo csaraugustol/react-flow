@@ -31,17 +31,17 @@ import SendWPPNode from '../SendWPPNode/index';
 import { IMaskInput } from "react-imask";
 import SendHTTPNode from '../SendHTTPNode/index';
 
-//const initialNodes = [
-    //{
-    //    id: '1',
-    //    type: 'input',
-    //    data: { label: 'Input Node' },
-    //    position: { x: 250, y: 5 },
-    //    sourcePosition: 'right',
-    //    targetPosition: 'left',
-    //    className: 'base-node input-node-inicial'
-    //}
-//];
+// const initialNodes = [
+//     {
+//        id: '1',
+//        type: 'input',
+//        data: { label: 'Input Node' },
+//        position: { x: 250, y: 5 },
+//        sourcePosition: 'right',
+//        targetPosition: 'left',
+//        className: 'base-node input-node-inicial'
+//     }
+// ];
 
 // const initialEdges = [
 //   { id: '1', source: '1', sourceHandle: 'a', target: '3' },
@@ -289,6 +289,59 @@ const Flow = () => {
         [reactFlowInstance]
     );
 
+    const onDoubleClick = useCallback(
+        (event, nodeType, nodeLabel) => {
+            event.preventDefault();
+
+            const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
+            const type = nodeType;
+            const label = nodeLabel;
+
+            // check if the dropped element is valid
+            if (typeof type === 'undefined' || !type) {
+                return;
+            }
+            if (typeof label === 'undefined' || !label) {
+                return;
+            }
+
+            if (type === 'sendEmail') {
+                handleShowEmail();
+            }
+
+            if (type === 'sendSms') {
+                handleShowSMS();
+            }
+
+            if (type === 'sendWhatsapp') {
+                handleShowWPP();
+            }
+
+            if (type === 'sendHTTP') {
+                handleShowHTTP();
+            }
+
+            const position = reactFlowInstance.project({
+                x: 250 - reactFlowBounds.left,
+                y: 5 - reactFlowBounds.top,
+            });
+
+            const nameOfClass = label.replace(" ", "-")
+            const newNode = {
+                id: getId(),
+                type,
+                position,
+                sourcePosition: 'right',
+                targetPosition: 'left',
+                data: { label: `${label}` },
+                className: 'base-node ' + nameOfClass.toLowerCase(),
+            };
+            
+            setNodes((nds) => nds.concat(newNode));
+        },
+        [reactFlowInstance]
+    );
+
     const onSave = useCallback(() => {
         if (reactFlowInstance) {
             const flow = reactFlowInstance.toObject();
@@ -314,7 +367,7 @@ const Flow = () => {
     return (
         <div className='dndflow'>
             <ReactFlowProvider>
-                <SidebarEventos onSave={onSave} onRestore={onRestore}/>
+                <SidebarEventos onDoubleClick={onDoubleClick} onSave={onSave} onRestore={onRestore} on/>
                 <div className="reactflow-wrapper" ref={reactFlowWrapper}>
                     <ReactFlow
                         nodes={nodes}
@@ -339,7 +392,7 @@ const Flow = () => {
                     <button className='btn-save' onClick={onSave}>Save</button>
                     <button className='btn-restore' onClick={onRestore}>Restore</button>
                 </div> */}
-                <SidebarAcoes />
+                <SidebarAcoes onDoubleClick={onDoubleClick}/>
                 
                 {/*Modal EMAIL*/}
                 <Modal

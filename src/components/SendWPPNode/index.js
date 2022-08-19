@@ -173,7 +173,7 @@ function SendWPPNode({ data }) {
                     <hr />
                     <p>Destinatarios Selecionados:</p>
                     <Button variant="outline-warning" id="button-edit" onClick={handleEditWPPs}>
-                        Habilitar Edição <i className="fa fa-lock" id="lock" aria-hidden="true"></i>
+                    <i className="fa fa-lock" id="lock" aria-hidden="true"></i> Habilitar EdiÃ§Ã£o
 
                     </Button>
                     <ul id="listaDestinatariosWPP">
