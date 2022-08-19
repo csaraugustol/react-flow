@@ -368,6 +368,7 @@ const Flow = () => {
         <div className='dndflow'>
             <ReactFlowProvider>
                 <SidebarEventos onDoubleClick={onDoubleClick} onSave={onSave} onRestore={onRestore} on />
+
                 <div className="reactflow-wrapper" ref={reactFlowWrapper}>
                     <ReactFlow
                         nodes={nodes}
@@ -392,7 +393,6 @@ const Flow = () => {
                     <button className='btn-save' onClick={onSave}>Save</button>
                     <button className='btn-restore' onClick={onRestore}>Restore</button>
                 </div> */}
-                <SidebarAcoes onDoubleClick={onDoubleClick} />
 
                 {/*Modal EMAIL*/}
                 <Modal
