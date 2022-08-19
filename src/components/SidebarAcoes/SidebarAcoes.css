@@ -51,6 +51,7 @@
 .dndnode.select-updater, #btn-menu-acoes {
     border-color: #FF8C00;
     color: #FF8C00;
+    background-color: #486402;
 }
 
 .dndnode.select-updater:hover, #btn-menu-acoes:hover {
@@ -62,6 +63,8 @@ aside {
     padding: 15px 10px;
     font-size: 15px;
     background: #dcdcdc;
+    position: absolute;
+    z-index: 100;
 }
 
 aside .description {
