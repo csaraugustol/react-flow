@@ -227,6 +227,11 @@ const Flow = () => {
         handleCloseWPP();
     };
 
+    const handleAddPayloadHTTP = () => {
+
+    }
+
+
     const flowKey = 'flow-token-123';
 
     const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
@@ -532,7 +537,7 @@ const Flow = () => {
                 {/*Modal HTTP*/}
                 <Modal
                     size="lg"
-                    show={showHTTP}
+                    show={true}
                     backdrop="static"
                     keyboard={false}
                     onHide={() => setShowHTTP(false)}
@@ -600,7 +605,7 @@ const Flow = () => {
                             <hr />
                             <h5>Corpo (Payload)</h5>
                             <Form.Group className="mb-3" controlId="formBasicWPP">
-                                <Button variant="outline-primary" id="button-addon2" >
+                                <Button variant="outline-primary" id="button-payload" onClick={handleAddPayloadHTTP}>
                                     Editar o corpo
                                 </Button>
                             </Form.Group>
