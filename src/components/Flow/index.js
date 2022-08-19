@@ -98,10 +98,10 @@ const Flow = () => {
         li.title = "REMOVER";
         lista.appendChild(li);
 
-        var lis = lista.getElementsByTagName('li');        
+        var lis = lista.getElementsByTagName('li');
 
         const arrayLS = [];
-        
+
         for (let i = 0; i <= lis.length - 1; i++) {
             arrayLS.push(lis[i].innerHTML);
         }
@@ -283,7 +283,7 @@ const Flow = () => {
                 data: { label: `${label}` },
                 className: 'base-node ' + nameOfClass.toLowerCase(),
             };
-            
+
             setNodes((nds) => nds.concat(newNode));
         },
         [reactFlowInstance]
@@ -336,7 +336,7 @@ const Flow = () => {
                 data: { label: `${label}` },
                 className: 'base-node ' + nameOfClass.toLowerCase(),
             };
-            
+
             setNodes((nds) => nds.concat(newNode));
         },
         [reactFlowInstance]
@@ -367,7 +367,7 @@ const Flow = () => {
     return (
         <div className='dndflow'>
             <ReactFlowProvider>
-                <SidebarEventos onDoubleClick={onDoubleClick} onSave={onSave} onRestore={onRestore} on/>
+                <SidebarEventos onDoubleClick={onDoubleClick} onSave={onSave} onRestore={onRestore} on />
                 <div className="reactflow-wrapper" ref={reactFlowWrapper}>
                     <ReactFlow
                         nodes={nodes}
@@ -392,8 +392,8 @@ const Flow = () => {
                     <button className='btn-save' onClick={onSave}>Save</button>
                     <button className='btn-restore' onClick={onRestore}>Restore</button>
                 </div> */}
-                <SidebarAcoes onDoubleClick={onDoubleClick}/>
-                
+                <SidebarAcoes onDoubleClick={onDoubleClick} />
+
                 {/*Modal EMAIL*/}
                 <Modal
                     size="lg"
@@ -556,29 +556,54 @@ const Flow = () => {
                                     </Button>
                                 </InputGroup>
                             </Form.Group>
-                        
-                        <hr />
-                        <p>Tipo de metodo:</p>
-                        {[ 'radio'].map((type) => (
-                            <div key={`inline-${type}`} className="mb-3">
-                                <Form.Check
-                                    inline
-                                    label="GET"
-                                    name="group1"
-                                    type={type}
-                                    id={`inline-${type}-1`}
-                                />
-                                <Form.Check
-                                    inline
-                                    label="POST"
-                                    name="group1"
-                                    type={type}
-                                    id={`inline-${type}-2`}
-                                />
-                            </div>
-                        ))}
-                        <hr />
-                        
+
+                            <hr />
+                            <h5>Tipo de metodo</h5>
+                            {['radio'].map((type) => (
+                                <div key={`inline-${type}`} className="mb-3">
+                                    <Form.Check
+                                        inline
+                                        label="GET"
+                                        name="group1"
+                                        type={type}
+                                        id={`inline-${type}-1`}
+                                    />
+                                    <Form.Check
+                                        inline
+                                        label="POST"
+                                        name="group1"
+                                        type={type}
+                                        id={`inline-${type}-2`}
+                                    />
+                                </div>
+                            ))}
+                            <hr />
+                            <h5>Cebeçalho</h5>
+                            <Form.Group className="mb-3" controlId="formBasicWPP">
+                                <InputGroup className="mb-6">
+                                    <InputGroup.Text>Chave</InputGroup.Text>
+                                    <FloatingLabel label="http://">
+                                        <Form.Control type="text" id="urlHTTP" placeholder="http://" style={{ borderRadius: 0, width: 450 }} />
+                                    </FloatingLabel>
+                                </InputGroup>
+                                <InputGroup className="mb-6">
+                                    <InputGroup.Text>Valor</InputGroup.Text>
+                                    <FloatingLabel label="http://">
+                                        <Form.Control type="text" id="urlHTTP" placeholder="http://" style={{ borderRadius: 0, width: 450 }} />
+                                    </FloatingLabel>
+                                </InputGroup>
+                                <Button variant="outline-primary" id="button-addon2" >
+                                    Novo cabeçalho
+                                </Button>
+                            </Form.Group>
+
+                            <hr />
+                            <h5>Corpo (Payload)</h5>
+                            <Form.Group className="mb-3" controlId="formBasicWPP">
+                                <Button variant="outline-primary" id="button-addon2" >
+                                    Editar o corpo
+                                </Button>
+                            </Form.Group>
 
                         </Form>
                     </Modal.Body>
@@ -589,9 +614,9 @@ const Flow = () => {
                     </Modal.Footer>
                 </Modal>
             </ReactFlowProvider>
-            
+
         </div>
-        
+
     );
 };
 
