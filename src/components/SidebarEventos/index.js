@@ -1,7 +1,7 @@
 import './SidebarEventos.css';
 import React, { Children } from 'react';
 
-export default () => {
+export default (props) => {
 
   const onDragStart = (event, nodeType, label) => {
     event.dataTransfer.setData('application/reactflow', nodeType);
@@ -13,8 +13,8 @@ export default () => {
     <aside className='aside-eventos'>
       <h3 className='titulo'>Eventos</h3>
       <div className="save__controls">
-        <button className='btn-save'>Save</button>
-        <button className='btn-restore'>Restore</button>
+        <button className='btn-save' onClick={props.onSave}>Salvar</button>
+        <button className='btn-restore' onClick={props.onRestore}>Restaurar</button>
       </div>
       <hr />
       <div className="dndnode select-updater" onDragStart={(event) => onDragStart(event, 'selectAtrasoColeta', 'Atraso na coleta Node')} draggable>
