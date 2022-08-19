@@ -314,7 +314,7 @@ const Flow = () => {
     return (
         <div className='dndflow'>
             <ReactFlowProvider>
-                <SidebarEventos />
+                <SidebarEventos onSave={onSave} onRestore={onRestore}/>
                 <div className="reactflow-wrapper" ref={reactFlowWrapper}>
                     <ReactFlow
                         nodes={nodes}
