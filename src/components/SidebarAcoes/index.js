@@ -1,6 +1,6 @@
 import './SidebarAcoes.css';
 import React, { Children } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { FaPlusCircle } from 'react-icons/fa';
 import { FaTimesCircle } from 'react-icons/fa';
 

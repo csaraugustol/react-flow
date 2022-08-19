@@ -1,5 +1,5 @@
 import './SendEmailNode.css'
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Handle, Position } from 'react-flow-renderer';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -14,7 +14,7 @@ function SendEmailNode({ data }) {
 
     const [showEmail, setShowEmail] = useState(false);
 
-    const handleCloseEmail = () => setShowEmail(false) ;
+    const handleCloseEmail = () => setShowEmail(false);
     const handleShowEmail = () => setShowEmail(true);
     const handleAddAndCloseEmail = () => {
 
@@ -24,6 +24,7 @@ function SendEmailNode({ data }) {
         localStorage.setItem("listaDestinatariosEmail", destinatarioPrincipal);
 
         handleCloseEmail();
+
     };
     const handleAddEmail = () => {
 
@@ -45,40 +46,71 @@ function SendEmailNode({ data }) {
         }
 
         localStorage.setItem("listaDestinatariosEmail", arrayLS);
+        li.onclick = function () {
+            lista.removeChild(li);
+            var lis = lista.getElementsByTagName('li');
 
+            const arrayLS = [];
 
+            for (let i = 0; i <= lis.length - 1; i++) {
+                arrayLS.push(lis[i].innerHTML);
+            }
+
+            localStorage.setItem("listaDestinatariosEmail", arrayLS);
+        };
 
         newValue.value = "";
     };
 
-    const labelData = [localStorage.getItem("listaDestinatariosEmail")];
-    let labelDataSplitted = [];
-    if (labelData[0] != null) {
+    function content() {
+        let labelData = [localStorage.getItem("listaDestinatariosEmail")];
+        let labelDataSplitted = [];
+        if (labelData[0] != null) {
 
-        labelDataSplitted = labelData[0].split(",")
+            labelDataSplitted = labelData[0].split(",")
+        }
+        return labelDataSplitted;
     }
 
-    const removeLi = (e) => {
+    function editModel() {
 
+        handleShowEmail();
+    }
+
+    const handleEditEmails = () => {
+        let btn = document.getElementById("button-edit");
+        btn.removeChild(document.getElementById("lock"));
+        let novoIcone = document.createElement('i');
+        novoIcone.className = "fa fa-unlock";
+        btn.appendChild(novoIcone);
 
         let lista = document.getElementById("listaDestinatariosEmail");
-        
-        let li = e.target;
-        removeTeste(li);
-        var lis = lista.getElementsByTagName('li');
+        lista.replaceChildren([])
 
-        const arrayLS = [];
+        console.log(lista.children)
+        content().map(item => {
+            var li = document.createElement("li");
+            li.value = item;
+            li.innerHTML = `${item}`;
+            li.title = "REMOVER";
+            lista.appendChild(li);
+            li.onclick = function () {
+                lista.removeChild(li);
+                var lis = lista.getElementsByTagName('li');
 
-        for (let i = 0; i <= lis.length - 1; i++) {
-            arrayLS.push(lis[i].innerHTML);
+                const arrayLS = [];
+
+                for (let i = 0; i <= lis.length - 1; i++) {
+                    arrayLS.push(lis[i].innerHTML);
+                }
+
+                localStorage.setItem("listaDestinatariosEmail", arrayLS);
+            };
+
+        })
+        if (lista.children.length <= 0) {
+            alert("sem emails cadastrados")
         }
-
-        localStorage.setItem("listaDestinatariosEmail", arrayLS);
-
-    }
-
-    function removeTeste(li) {
-        li.remove();
     }
 
     return (
@@ -86,15 +118,14 @@ function SendEmailNode({ data }) {
         <div className="send-email-node">
 
             <div>
+                <p style={{ listStyleType: 'none' }}>Enviar e-mail para:
+                    <Button variant="outline-light" style={{marginLeft: 40, border: 'none', backgroundColor: 'transparent' }} id="btn-edt-email" onClick={editModel}>
+                        <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                    </Button>
+                </p>
                 <ul>
-                    <li style={{ listStyleType: 'none' }}>Enviar e-mail para:</li>
-
-                    {labelDataSplitted.map(item => <li key={item}>{item}</li>)}
-
+                    {content().map(item => <li key={item}>{item}</li>)}
                 </ul>
-                <Button variant="primary" id="btn-edt-email" onClick={handleShowEmail}>
-                    Edit
-                </Button>
             </div>
 
             <Handle
@@ -105,6 +136,7 @@ function SendEmailNode({ data }) {
                 type="target"
                 position="left"
             />
+
             <Modal
                 size="lg"
                 show={showEmail}
@@ -138,14 +170,19 @@ function SendEmailNode({ data }) {
                     </Form>
                     <hr />
                     <p>Destinatarios Selecionados:</p>
-                    <ul id="listaDestinatariosEmail">
-                        {labelDataSplitted.map(item => <li key={item} id={item} onClick={removeLi}>{item}</li>)}
+                    <Button variant="outline-warning" id="button-edit" onClick={handleEditEmails}>
+                        Habilitar Edição <i className="fa fa-lock" id="lock" aria-hidden="true"></i>
+
+                    </Button>
+
+                    <ul id="listaDestinatariosEmail" name="lista">
+
                     </ul>
 
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={handleCloseEmail}>
-                        SELECIONAR
+                        OK
                     </Button>
                 </Modal.Footer>
             </Modal>
