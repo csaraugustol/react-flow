@@ -53,24 +53,36 @@
     background-color: #4B0082;
 }*/
 
-.dndnode.select-updater {
+.dndnode.select-updater, #btn-menu-eventos {
     border-color: #FF8C00;
     color: #FF8C00;
+    background-color: #486402;
 }
 
-.dndnode.select-updater:hover {
+.dndnode.select-updater:hover, #btn-menu-eventos:hover {
     color: #ffffff;
     background-color: #FF8C00;
 }
-
 aside {
     padding: 15px 10px;
     font-size: 15px;
-    background: #dcdcdc;
+    background: transparent;
 }
 
 aside .description {
     margin-bottom: 10px;
+}
+
+
+#botoes-menu {
+    justify-content: space-between;
+    display: flex;
+    margin-bottom: 15px;
+}
+
+#botoes-menu button {
+    width: 100px;
+    height: 40px;
 }
 
 .dndnode.text-updater {
@@ -112,31 +124,65 @@ aside .description {
     display: flex;
 }
 
-.aside-eventos .save__controls .btn-save, .aside-eventos .save__controls .btn-restore {
+.aside-eventos .save__controls .btn-save,
+.aside-eventos .save__controls .btn-restore {
     text-align: center;
     width: 100px;
     height: 30px;
     font-weight: bold;
     border-radius: 12px;
-  }
-  
-  .aside-eventos .save__controls .btn-save {
+}
+
+.aside-eventos .save__controls .btn-save {
     background-color: rgb(12, 161, 31);
-  }
-  
-  .aside-eventos .save__controls .btn-restore {
+}
+
+.aside-eventos .save__controls .btn-restore {
     background-color: rgb(224, 0, 0);
-  }
+}
 
-  .aside-eventos .save__controls .btn-save:hover {
+.aside-eventos .save__controls .btn-save:hover {
     background-color: rgb(49, 204, 70);
-  }
-  
-  .aside-eventos .save__controls .btn-restore:hover {
-    background-color: rgb(255, 41, 41);
-  }
+}
 
-  .aside-eventos .acoes .dndnode {
+.aside-eventos .save__controls .btn-restore:hover {
+    background-color: rgb(255, 41, 41);
+}
+
+.aside-eventos .acoes .dndnode {
     height: 40px;
-  }
-  
+}
+
+.sidebar-eventos {
+    display: none;
+    height: 100%;
+}
+
+.cabecalho-sidebar-eventos .btn-fechar {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+
+#btn-menu-eventos {
+    padding: 5px;
+    font-weight: bold;
+    line-height: 0;
+    border: 1px solid;
+}
+
+.name {
+    margin-right: 10px;
+}
+
+#sidebar-eventos, #sidebar-acoes {
+    background-color: #dfdfdf;
+}
+
+h5 {
+    font-weight: bold;
+}
+
