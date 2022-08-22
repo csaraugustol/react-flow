@@ -30,6 +30,9 @@ import SendSMSNode from '../SendSMSNode/index';
 import SendWPPNode from '../SendWPPNode/index';
 import { IMaskInput } from "react-imask";
 import SendHTTPNode from '../SendHTTPNode/index';
+import { useFieldArray, useForm } from "react-hook-form";
+import { ErrorMessage } from '@hookform/error-message';
+// import { yupResolver } from '@hookform/resolvers/dist/ie11/yup';
 
 // const initialNodes = [
 //     {
@@ -74,7 +77,11 @@ const Flow = () => {
     const [showSMS, setShowSMS] = useState(false);
     const [showWPP, setShowWPP] = useState(false);
     const [showHTTP, setShowHTTP] = useState(false);
-    const [componentesCabecalho, setComponentesCabecalho] = useState(["chave", "valor"]);
+    const { control, register, handleSubmit, formState: { errors } } = useForm([], { delayError: 500 }, { shouldUseNativeValidation: true });
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: "componentesCabecalho",
+    });
 
     const handleCloseWPP = () => setShowWPP(false);
     const handleShowWPP = () => setShowWPP(true);
@@ -374,47 +381,12 @@ const Flow = () => {
         return "<Form.Group className=\"mb-3 col-lg-6\"><InputGroup ><InputGroup.Text>Chave</InputGroup.Text><Form.Control type=\"text\" id=\"chave1\" placeholder=\"Informe a chave\" /></InputGroup></Form.Group>";
     };
 
-    const novoCabecalho = (e) => {
-        e.preventDefault();
-
-        setComponentesCabecalho([...componentesCabecalho, ""]);
-
-        // let btn = document.getElementById("button-edit");
-        // btn.removeChild(document.getElementById("lock"));
-        // let novoIcone = document.createElement('i');
-        // novoIcone.className = "fa fa-unlock";
-        // btn.appendChild(novoIcone);
-
-        // var formGroupCabecalho = document.getElementById("form-group-cabecalho");
-        // let div = document.createElement("div");
-
-        // div.setAttribute("<InputGroup className=\"mb-3\"><InputGroup.Text>Chave</InputGroup.Text><Form.Control type=\"text\" id=\"chave1\" placeholder=\"Informe a chave\" /></InputGroup><InputGroup className=\"mb-5\"><InputGroup.Text>Valor</InputGroup.Text><Form.Control type=\"text\" id=\"valor1\" placeholder=\"Informe o calor da chave\" /></InputGroup>");
-        // div.append(componente());
-        // console.log(div);
-        // formGroupCabecalho.append(div);
-
-        // formGroupCabecalho.append("<Form.Group><InputGroup className=\"mb-3\"><InputGroup.Text>Chave</InputGroup.Text><Form.Control type=\"text\" id=\"chave1\" placeholder=\"Informe a chave\" /></InputGroup><InputGroup className=\"mb-5\"><InputGroup.Text>Valor</InputGroup.Text><Form.Control type=\"text\" id=\"valor1\" placeholder=\"Informe o calor da chave\" /></InputGroup></Form.Group>");
-    };
-
-    const handleComponentesCabecalhoChave = (e, index) => {
-        componentesCabecalho.chave[index] = e.target.value;
-        setComponentesCabecalho([...componentesCabecalho.chave]);
-
-        console.log(componentesCabecalho.chave);
-    };
-
-    const handleComponentesCabecalhoValor = (e, index) => {
-        componentesCabecalho.valor[index] = e.target.value;
-        setComponentesCabecalho([...componentesCabecalho.valor]);
-        console.log(setComponentesCabecalho(componentesCabecalho.valor));
-    };
-
-    const handleRemoveGrupoCabecalho = (posicao) => {
-        setComponentesCabecalho([componentesCabecalho.filter((_, index) => index !== posicao)]);
-        setComponentesCabecalho([componentesCabecalho.filter((_, index) => index !== posicao)]);
-        // let grupo = document.getElementById("grupo" . posicao);
-        // console.log(grupo);
-        // grupo.remove();
+    const add = () => {
+        append(
+            {
+                chave: '',
+                valor: '',
+            })
     };
 
     return (
@@ -563,7 +535,7 @@ const Flow = () => {
                                     <FloatingLabel label="(DDD) + Numero">
                                         <Form.Control as={IMaskInput} mask="(00) 0 0000-0000" type="text" id="newWPP" placeholder="(DDD) 9 1234-5678" style={{ borderRadius: 0, width: 450 }} />
                                     </FloatingLabel>
-                                    <Button variant="outline-primary" id="button-addon2" onClick={handleAddWPP}>
+                                    <Button variant="outline-primary" id="button-addon2" onClick={add}>
                                         Adicionar
                                     </Button>
                                 </InputGroup>
@@ -597,12 +569,12 @@ const Flow = () => {
                     </Modal.Header>
 
                     <Modal.Body>
-                        <Form>
+                        <Form onSubmit={handleSubmit()}>
                             <Form.Group className="mb-3" controlId="formBasicWPP">
                                 <InputGroup className="mb-3">
                                     <InputGroup.Text>URL</InputGroup.Text>
                                     <FloatingLabel label="http://">
-                                        <Form.Control type="text" id="urlHTTP" placeholder="http://" style={{ borderRadius: 0, width: 450 }} />
+                                        <Form.Control type="text" id="urlHTTP" placeholder="http://"/>
                                     </FloatingLabel>
                                     <Button variant="outline-primary" id="button-addon2" >
                                         Load data
@@ -633,28 +605,37 @@ const Flow = () => {
                             <hr />
                             <h5>Cebeçalho</h5>
 
-                            <Button className='mb-3' variant="outline-primary" id="btn-novo-cabecalho" onClick={novoCabecalho} >
+                            <Button className='mb-3' variant="outline-primary" id="btn-novo-cabecalho" onClick={add} >
                                 Novo cabeçalho
                             </Button>
-                            {componentesCabecalho.map((componente, index) => (
-                                <div style={{display: "flex"}}>
-                                    <div key={index} className="mb-3 row" id={`grupo${index + 1}`}>
-                                        <Form.Group className="col-lg-6">
-                                            <InputGroup >
-                                                <InputGroup.Text for={`chave${index + 1}`}>{`Chave ${index + 1}`}</InputGroup.Text>
-                                                <Form.Control value={componente.chave} type="text" id={`chave${index + 1}`} placeholder="Informe a chave" onChange={(evento) => handleComponentesCabecalhoChave(evento, index)} />
-                                            </InputGroup>
-                                        </Form.Group>
-                                        <Form.Group className="col-lg-6">
-                                            <InputGroup>
-                                                <InputGroup.Text for={`valor${index + 1}`}>{`Valor ${index + 1}`}</InputGroup.Text>
-                                                <Form.Control value={componente.valor} type="text" id={`valor${index + 1}`} placeholder="Informe o valor" onChange={(evento) => handleComponentesCabecalhoValor(evento, index)} />
-                                            </InputGroup>
-                                        </Form.Group>
+                            {add}
+                            {fields.map((componente, index) => (
+                                <div key={componente.id} className="">
+                                    <div className="mb-2 row " id={`grupo${index + 1}`}>
+                                        <span className='mb-1'>Cabeçalho {`${index + 1}`}</span>
+                                        <div className="row ">
+                                            <Form.Group className="col-lg-5">
+                                                <InputGroup >
+                                                    <InputGroup.Text style={{ width: 60, textAlign: "center" }}>Chave</InputGroup.Text>
+                                                    <Form.Control type="text" placeholder="Informe a chave" {...register(`componentesCabecalho.${index}.chave`, { required: "Campo obrigatório" })} />
+                                                </InputGroup>
+                                                <ErrorMessage errors={errors} name={`componentesCabecalho.${index}.chave`} render={({ message }) => <span style={{ color: "red", fontWeight: "bold" }} >{message}</span>} />
+                                            </Form.Group>
+                                            <Form.Group className="col-lg-5">
+                                                <InputGroup>
+                                                    <InputGroup.Text style={{ width: 60, textAlign: "center" }}>Valor</InputGroup.Text>
+                                                    <Form.Control type="text" name="valor" placeholder="Informe o valor" {...register(`componentesCabecalho.${index}.valor`, { required: "Campo obrigatório" })} />
+                                                </InputGroup>
+                                                <ErrorMessage errors={errors} name={`componentesCabecalho.${index}.valor`} render={({ message }) => <span style={{ color: "red", fontWeight: "bold" }} >{message}</span>} />
+
+                                            </Form.Group>
+                                            {index !== 0 &&
+                                                <Button className='btn-danger col-lg-1 float-right' id="btn-remove-cabecalho" onClick={() => { remove(index) }}>
+                                                    <i className='fa fa-trash'></i>
+                                                </Button>
+                                            }
+                                        </div>
                                     </div>
-                                    <Button style={{display: "flex", float: "right"}} className='mb-3 btn-danger' id="btn-remove-cabecalho" onClick={() => {handleRemoveGrupoCabecalho(index)}}>
-                                        <i className='fa fa-trash'></i>
-                                    </Button>
                                 </div>
                             ))}
 
@@ -665,7 +646,9 @@ const Flow = () => {
                                     Editar o corpo
                                 </Button>
                             </Form.Group>
-
+                            <pre>
+                                <code>{JSON.stringify(fields, null, 2)}</code>
+                            </pre>
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
