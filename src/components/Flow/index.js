@@ -568,7 +568,7 @@ const Flow = () => {
                 {/*Modal HTTP*/}
                 <Modal
                     size="lg"
-                    show={true}
+                    show={showHTTP}
                     backdrop="static"
                     keyboard={false}
                     onHide={() => setShowHTTP(false)}
