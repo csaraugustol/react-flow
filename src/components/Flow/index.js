@@ -657,9 +657,9 @@ const Flow = () => {
                                     Editar o corpo
                                 </Button>
                             </Form.Group>
-                            <pre>
+                            {/* <pre>
                                 <code>{JSON.stringify(fields, null, 2)}</code>
-                            </pre>
+                            </pre> */}
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
