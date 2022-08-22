@@ -100,6 +100,16 @@ function SendSMSNode({ data }) {
         }
     }
 
+    function teste() {
+
+        var div = document.getElementById("nodeDiv");
+        div.onkeydown = function (evt) {
+            
+            evt = evt || window.event;
+            console.log("keydown: " + evt.keyCode);
+        };
+        
+    }
 
     function editModel() {
         handleShowSMS();
@@ -115,9 +125,10 @@ function SendSMSNode({ data }) {
         return labelDataSplitted;
     }
 
+    
 
     return (
-        <div className="send-sms-node">
+        <div id="nodeDiv" onClick={teste} className="send-sms-node">
 
             <div>
                 <p style={{ listStyleType: 'none' }}>Enviar SMS para:
@@ -126,7 +137,7 @@ function SendSMSNode({ data }) {
                         , border: 'none', backgroundColor: 'transparent'
                     }}
                         id="btn-edt-email" onClick={editModel}>
-                        <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                        <i className-="fa fa-pencil-square" aria-hidden="true"></i>
                     </Button>
                 </p>
                 <ul>
