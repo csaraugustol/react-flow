@@ -110,28 +110,28 @@ aside .description {
     height: 100%;
 }
 
-.cabecalho-sidebar-acoes {
+.cabecalho-sidebar {
     display: flex;
     justify-content: space-between;
 }
 
-.cabecalho-sidebar-acoes {
+.cabecalho-sidebar {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.cabecalho-sidebar-acoes button {
+.cabecalho-sidebar button {
     padding: 0px;
     align-items: flex-end;
 }
 
-.cabecalho-sidebar-acoes h3 {
+.cabecalho-sidebar h3 {
     padding: 0px;
     margin: 0;
 }
 
-.cabecalho-sidebar-acoes .btn-fechar {
+.cabecalho-sidebar .btn-fechar {
     background-color: transparent;
     border: none;
     display: flex;

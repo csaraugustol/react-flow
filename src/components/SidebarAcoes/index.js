@@ -33,7 +33,7 @@ export default (props) => {
     <aside className='aside-acoes'>
       <button id='btn-menu-acoes' onClick={() => chamaMenu()}><FaPlusCircle className='name'/>Ações</button>
       <div id='sidebar-acoes' className='sidebar-acoes'>
-        <div className='cabecalho-sidebar-acoes'>
+        <div className='cabecalho-sidebar'>
           <h3>Ações</h3>
           <button className='btn-fechar' onClick={() => fecharMenu()}><FaTimesCircle /></button>
         </div>

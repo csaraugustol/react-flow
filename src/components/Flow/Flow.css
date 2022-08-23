@@ -14,17 +14,6 @@
   margin-top: 10px;
 }
 
-@media screen and (min-width: 768px) {
-  .dndflow {
-    flex-direction: row;
-  }
-
-  .dndflow aside {
-    width: 20%;
-    max-width: 250px;
-  }
-}
-
 .base-node {
   font-weight: bold;
   border-radius: 12px;
@@ -65,3 +54,32 @@ ul {
 ul li:hover{
     cursor: pointer;
 }
+
+/* Modal HTTP */
+@media screen and (min-width: 768px) {
+  .dndflow {
+    flex-direction: row;
+  }
+
+  .dndflow aside {
+    width: 20%;
+    max-width: 250px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .grupo-cabecalho .form-group, #btn-remove-cabecalho{
+    margin-top: 7px;
+  }
+
+  .grupo-cabecalho {
+    justify-content: center;
+  }
+
+  #btn-remove-cabecalho{
+    width: 94%;
+    display: inline;
+    margin-left: 12px;
+  }
+}
+

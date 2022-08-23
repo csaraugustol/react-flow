@@ -53,7 +53,7 @@ export default (props) => {
         <button id='btn-menu-acoes' onClick={() => chamaMenuAcoes()}><FaPlusCircle className='name' />Ações</button>
       </div>
       <div id='sidebar-eventos' className='sidebar-eventos'>
-      <div className='cabecalho-sidebar-acoes'>
+      <div className='cabecalho-sidebar'>
         <h3 className='titulo'>Eventos</h3>
         <button className='btn-fechar' onClick={() => fechaMenuEventos()}><FaTimesCircle /></button>
         </div>
@@ -80,7 +80,7 @@ export default (props) => {
       </div>
       <div>
         <div id='sidebar-acoes' className='sidebar-acoes'>
-          <div className='cabecalho-sidebar-acoes'>
+          <div className='cabecalho-sidebar'>
             <h3 className='titulo'>Ações</h3>
             <button className='btn-fechar' onClick={() => fechaMenuAcoes()}><FaTimesCircle /></button>
           </div>

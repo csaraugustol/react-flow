@@ -53,16 +53,19 @@
     background-color: #4B0082;
 }*/
 
-.dndnode.select-updater, #btn-menu-eventos {
+.dndnode.select-updater,
+#btn-menu-eventos {
     border-color: #FF8C00;
     color: #FF8C00;
     background-color: #486402;
 }
 
-.dndnode.select-updater:hover, #btn-menu-eventos:hover {
+.dndnode.select-updater:hover,
+#btn-menu-eventos:hover {
     color: #ffffff;
     background-color: #FF8C00;
 }
+
 aside {
     padding: 15px 10px;
     font-size: 15px;
@@ -178,11 +181,21 @@ aside .description {
     margin-right: 10px;
 }
 
-#sidebar-eventos, #sidebar-acoes {
+#sidebar-eventos,
+#sidebar-acoes {
     background-color: #dfdfdf;
+    padding: 5px;
+    margin-bottom: 16px;
 }
 
 h5 {
     font-weight: bold;
 }
 
+@media screen and (max-width: 576px) and (max-width: 768px) and (max-width: 992px){
+
+    #sidebar-eventos,
+    #sidebar-acoes {
+        width: 300px;
+    }
+}

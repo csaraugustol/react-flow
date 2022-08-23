@@ -454,7 +454,7 @@ const Flow = () => {
                                 <InputGroup className="mb-3">
                                     <InputGroup.Text>Adicionar destinatario: </InputGroup.Text>
                                     <FloatingLabel label="E-mail">
-                                        <Form.Control type="email" id="newEmail" placeholder="nome@email.com" style={{ borderRadius: 0, width: 450 }} />
+                                        <Form.Control type="email" id="newEmail" placeholder="nome@email.com"/>
                                     </FloatingLabel>
                                     <Button variant="outline-primary" id="button-addon2" onClick={handleAddEmail}>
                                         Adicionar
@@ -499,7 +499,7 @@ const Flow = () => {
                                 <InputGroup className="mb-3">
                                     <InputGroup.Text>Adicionar destinatario: </InputGroup.Text>
                                     <FloatingLabel label="(DDD) + Numero">
-                                        <Form.Control as={IMaskInput} mask="(00) 0 0000-0000" type="text" id="newSMS" placeholder="(DDD) 9 1234-5678" style={{ borderRadius: 0, width: 450 }} />
+                                        <Form.Control as={IMaskInput} mask="(00) 0 0000-0000" type="text" id="newSMS" placeholder="(DDD) 9 1234-5678"/>
                                     </FloatingLabel>
                                     <Button variant="outline-primary" id="button-addon2" onClick={handleAddSMS}>
                                         Adicionar
@@ -544,7 +544,7 @@ const Flow = () => {
                                 <InputGroup className="mb-3">
                                     <InputGroup.Text>Adicionar destinatario: </InputGroup.Text>
                                     <FloatingLabel label="(DDD) + Numero">
-                                        <Form.Control as={IMaskInput} mask="(00) 0 0000-0000" type="text" id="newWPP" placeholder="(DDD) 9 1234-5678" style={{ borderRadius: 0, width: 450 }} />
+                                        <Form.Control as={IMaskInput} mask="(00) 0 0000-0000" type="text" id="newWPP" placeholder="(DDD) 9 1234-5678"/>
                                     </FloatingLabel>
                                     <Button variant="outline-primary" id="button-addon2" onClick={add}>
                                         Adicionar
@@ -572,6 +572,7 @@ const Flow = () => {
                     backdrop="static"
                     keyboard={false}
                     onHide={() => setShowHTTP(false)}
+                    id="modal-http"
                 >
                     <Modal.Header closeButton>
                         <Row>
@@ -622,19 +623,19 @@ const Flow = () => {
                             {add}
                             {fields.map((componente, index) => (
                                 <div key={componente.id} className="">
-                                    <div className="mb-2 row " id={`grupo${index + 1}`}>
+                                    <div className="grupo-cabecalho mb-2 row " id={`grupo${index + 1}`}>
                                         <span className='mb-1'>Cabeçalho {`${index + 1}`}</span>
                                         <div className="row ">
-                                            <Form.Group className="col-lg-5">
+                                            <Form.Group className="form-group col-lg-5">
                                                 <InputGroup >
-                                                    <InputGroup.Text style={{ width: 60, textAlign: "center" }}>Chave</InputGroup.Text>
+                                                    <InputGroup.Text className='input-group-text'>Chave</InputGroup.Text>
                                                     <Form.Control type="text" placeholder="Informe a chave" {...register(`componentesCabecalho.${index}.chave`, { required: "Campo obrigatório" })} />
                                                 </InputGroup>
                                                 <ErrorMessage errors={errors} name={`componentesCabecalho.${index}.chave`} render={({ message }) => <span style={{ color: "red", fontWeight: "bold" }} >{message}</span>} />
                                             </Form.Group>
-                                            <Form.Group className="col-lg-5">
+                                            <Form.Group className="form-group col-lg-5">
                                                 <InputGroup>
-                                                    <InputGroup.Text style={{ width: 60, textAlign: "center" }}>Valor</InputGroup.Text>
+                                                    <InputGroup.Text className='input-group-text'>Valor</InputGroup.Text>
                                                     <Form.Control type="text" name="valor" placeholder="Informe o valor" {...register(`componentesCabecalho.${index}.valor`, { required: "Campo obrigatório" })} />
                                                 </InputGroup>
                                                 <ErrorMessage errors={errors} name={`componentesCabecalho.${index}.valor`} render={({ message }) => <span style={{ color: "red", fontWeight: "bold" }} >{message}</span>} />
